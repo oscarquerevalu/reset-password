@@ -12,7 +12,7 @@ public interface UserRepository extends JpaRepository<UserInfo, Long> {
 
     UserInfo findByEmail(String email);
 
-    @Modifying
+    @Modifying(clearAutomatically = true)
     @Query("update UserInfo u set u.password = :password where u.id = :id")
     void updatePassword(@Param("password") String password, @Param("id") Long id);
 }
