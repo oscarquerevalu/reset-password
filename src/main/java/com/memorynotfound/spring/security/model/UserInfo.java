@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -44,10 +45,12 @@ public class UserInfo implements Serializable {
 	@Column
 	@NotEmpty
 	private String password;
+	
+	@Column
+	private String confirmPassword;
 
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@Column
-	@NotNull
 	private LocalDate birthdate;
 	
 	@Column
@@ -56,15 +59,20 @@ public class UserInfo implements Serializable {
 	private String email;
 	
 	@Column
-	@NotEmpty
+	@Email
+	private String confirmEmail;
+	
+	@Column
 	private String telefono;
 	
 	@Column
-	@NotEmpty
 	private String documento;
 	
 	@Column
 	private String direccion;
+	
+	@AssertTrue
+    private Boolean terms;
 
 	@Column
 	@NotNull
@@ -184,6 +192,30 @@ public class UserInfo implements Serializable {
 
 	public void setReservas(List<Reserva> reservas) {
 		this.reservas = reservas;
+	}
+
+	public String getConfirmPassword() {
+		return confirmPassword;
+	}
+
+	public void setConfirmPassword(String confirmPassword) {
+		this.confirmPassword = confirmPassword;
+	}
+
+	public String getConfirmEmail() {
+		return confirmEmail;
+	}
+
+	public void setConfirmEmail(String confirmEmail) {
+		this.confirmEmail = confirmEmail;
+	}
+
+	public Boolean getTerms() {
+		return terms;
+	}
+
+	public void setTerms(Boolean terms) {
+		this.terms = terms;
 	}
 	
 }

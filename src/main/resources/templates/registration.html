@@ -18,12 +18,12 @@
                 <div class="panel-body">
                     <div class="text-center">
                         <h3><i class="glyphicon glyphicon-user" style="font-size:2em;"></i></h3>
-                        <h2 class="text-center">Register</h2>
+                        <h2 class="text-center">Registro de Usuario</h2>
                         <div class="panel-body">
 
                             <div th:if="${param.success}">
                                 <div class="alert alert-info">
-                                    You've successfully registered to our awesome app!
+                                    !Te has registrado satisfactoriamente!
                                 </div>
                             </div>
 
@@ -36,33 +36,48 @@
 
 
                                 <div class="form-group"
-                                     th:classappend="${#fields.hasErrors('firstName')}? 'has-error':''">
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <i class="glyphicon glyphicon-user color-blue"></i>
-                                        </span>
-                                        <input id="firstName"
-                                               class="form-control"
-                                               placeholder="First name"
-                                               th:field="*{firstName}"/>
-                                    </div>
-                                    <p class="error-message"
-                                       th:each="error: ${#fields.errors('firstName')}"
-                                       th:text="${error}">Validation error</p>
-                                </div>
-                                <div class="form-group"
-                                     th:classappend="${#fields.hasErrors('lastName')}? 'has-error':''">
+                                     th:classappend="${#fields.hasErrors('name')}? 'has-error':''">
                                     <div class="input-group">
                                         <span class="input-group-addon">
                                             <i class="glyphicon glyphicon-user color-blue"></i>
                                         </span>
                                         <input id="lastName"
                                                class="form-control"
-                                               placeholder="Last name"
-                                               th:field="*{lastName}"/>
+                                               placeholder="Apellido"
+                                               th:field="*{name}"/>
                                     </div>
                                     <p class="error-message"
-                                       th:each="error: ${#fields.errors('lastName')}"
+                                       th:each="error: ${#fields.errors('name')}"
+                                       th:text="${error}">Validation error</p>
+                                </div>
+                                <div class="form-group"
+                                     th:classappend="${#fields.hasErrors('telefono')}? 'has-error':''">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="glyphicon glyphicon-user color-blue"></i>
+                                        </span>
+                                        <input id="telefono"
+                                               class="form-control"
+                                               placeholder="Telefono"
+                                               th:field="*{telefono}"/>
+                                    </div>
+                                    <p class="error-message"
+                                       th:each="error: ${#fields.errors('telefono')}"
+                                       th:text="${error}">Validation error</p>
+                                </div>
+                                <div class="form-group"
+                                     th:classappend="${#fields.hasErrors('documento')}? 'has-error':''">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="glyphicon glyphicon-user color-blue"></i>
+                                        </span>
+                                        <input id="telefono"
+                                               class="form-control"
+                                               placeholder="Documento"
+                                               th:field="*{documento}"/>
+                                    </div>
+                                    <p class="error-message"
+                                       th:each="error: ${#fields.errors('documento')}"
                                        th:text="${error}">Validation error</p>
                                 </div>
                                 <div class="form-group"
@@ -84,7 +99,7 @@
                                         <span class="input-group-addon">@</span>
                                         <input id="confirmEmail"
                                                class="form-control"
-                                               placeholder="Confirm e-mail"
+                                               placeholder="Confirmar e-mail"
                                                th:field="*{confirmEmail}"/>
                                     </div>
                                     <p class="error-message"
@@ -116,7 +131,7 @@
                                         <input id="confirmPassword"
                                                class="form-control"
                                                type="password"
-                                               placeholder="Confirm password"
+                                               placeholder="Confirmar password"
                                                th:field="*{confirmPassword}"/>
                                     </div>
                                     <p class="error-message"
@@ -129,14 +144,14 @@
                                            type="checkbox"
                                            th:field="*{terms}"/>  
                                     <label class="control-label" for="terms">
-                                        I agree with the <a href="#">terms and conditions</a> for Registration.
+                                        Acepto los terminos <a href="#">terminos y condiciones</a> para el registro.
                                     </label>
                                     <p class="error-message"
                                        th:each="error : ${#fields.errors('terms')}"
                                        th:text="${error}">Validation error</p>
                                 </div>
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-success btn-block">Register</button>
+                                    <button type="submit" class="btn btn-success btn-block">Registrar</button>
                                 </div>
                             </form>
 
@@ -146,10 +161,10 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    Already registered? <a href="/" th:href="@{/login}">Login</a>
+                    ¿Cuentas con usuario? <a href="/" th:href="@{/login}">Login</a>
                 </div>
                 <div class="col-md-12">
-                    Forgot password? <a href="/" th:href="@{/forgot-password}">Reset password</a>
+                    ¿Olvidaste la contraseña? <a href="/" th:href="@{/forgot-password}">Reiniciar contraseña</a>
                 </div>
             </div>
         </div>

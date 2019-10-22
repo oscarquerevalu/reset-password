@@ -15,6 +15,8 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
+import javax.management.relation.Role;
+
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -28,13 +30,15 @@ public class UserServiceImpl implements UserService {
         return userRepository.findByEmail(email);
     }
 
-    public UserInfo save(UserRegistrationDto registration){
+    public UserInfo save(UserInfo registration){
         UserInfo userInfo = new UserInfo();
-//        user.setFirstName(registration.getFirstName());
-//        user.setLastName(registration.getLastName());
-//        user.setEmail(registration.getEmail());
-//        user.setPassword(passwordEncoder.encode(registration.getPassword()));
-//        user.setRoles(Arrays.asList(new Role("ROLE_USER")));
+        userInfo.setEmail(registration.getEmail());
+        userInfo.setUsername(registration.getEmail());
+        userInfo.setRole(UserInfo.Role.ROLE_USER);
+        userInfo.setName(registration.getName());
+        userInfo.setTelefono(registration.getTelefono());
+        userInfo.setDocumento(registration.getDocumento());
+        userInfo.setPassword(passwordEncoder.encode(registration.getPassword()));
         return userRepository.save(userInfo);
     }
 
@@ -49,15 +53,14 @@ public class UserServiceImpl implements UserService {
         if (userInfo == null){
             throw new UsernameNotFoundException("Invalid username or password.");
         }
-//        return new org.springframework.security.core.userdetails.User(user.getEmail(),
-//                user.getPassword(),
-//                mapRolesToAuthorities(user.getRoles()));
-        return null;
+        return new org.springframework.security.core.userdetails.User(userInfo.getEmail(),
+        		userInfo.getPassword(),
+                mapRolesToAuthorities(Arrays.asList(userInfo.getRole())));
     }
 
-//    private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles){
-//        return roles.stream()
-//                .map(role -> new SimpleGrantedAuthority(role.getName()))
-//                .collect(Collectors.toList());
-//    }
+    private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<com.memorynotfound.spring.security.model.UserInfo.Role> roles){
+        return roles.stream()
+                .map(role -> new SimpleGrantedAuthority(role.toString()))
+                .collect(Collectors.toList());
+    }
 }
