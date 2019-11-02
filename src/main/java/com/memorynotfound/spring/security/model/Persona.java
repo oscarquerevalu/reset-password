@@ -11,6 +11,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.NotNull;
@@ -27,7 +29,12 @@ import org.springframework.format.annotation.DateTimeFormat;
  *
  */
 @Entity
-public class UserInfo implements Serializable {
+public class Persona implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -79,18 +86,27 @@ public class UserInfo implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private Role role;
 	
-	@OneToMany(mappedBy="userInfo")
-    private List<Reserva> reservas;
+	@ManyToOne(optional=true)
+    @JoinColumn(name="id_profesor", referencedColumnName="id")
+	private Profesor profesor;
+	
+	@ManyToOne(optional=true)
+    @JoinColumn(name="id_alumno", referencedColumnName="id")
+	private Alumno alumno;
+	
+	@ManyToOne(optional=true)
+    @JoinColumn(name="id_apoderado", referencedColumnName="id")
+	private Apoderado apoderado;
 
-	public UserInfo() {
+	public Persona() {
 	}
 
 	public LocalDate getBirthdate() {
 		return birthdate;
 	}
 
-	public UserInfo(Long id, String username, String name, String password, LocalDate birthdate, String email,
-			String telefono, String documento, String direccion, Role role, List<Reserva> reservas) {
+	public Persona(Long id, String username, String name, String password, LocalDate birthdate, String email,
+			String telefono, String documento, String direccion, Role role) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -102,7 +118,6 @@ public class UserInfo implements Serializable {
 		this.documento = documento;
 		this.direccion = direccion;
 		this.role = role;
-		this.reservas = reservas;
 	}
 
 	public void setBirthdate(LocalDate birthdate) {
@@ -184,14 +199,6 @@ public class UserInfo implements Serializable {
 
 	public void setDireccion(String direccion) {
 		this.direccion = direccion;
-	}
-
-	public List<Reserva> getReservas() {
-		return reservas;
-	}
-
-	public void setReservas(List<Reserva> reservas) {
-		this.reservas = reservas;
 	}
 
 	public String getConfirmPassword() {

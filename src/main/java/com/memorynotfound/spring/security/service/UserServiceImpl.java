@@ -1,6 +1,6 @@
 package com.memorynotfound.spring.security.service;
 
-import com.memorynotfound.spring.security.model.UserInfo;
+import com.memorynotfound.spring.security.model.Persona;
 import com.memorynotfound.spring.security.repository.UserRepository;
 import com.memorynotfound.spring.security.web.dto.UserRegistrationDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,20 +26,20 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
-    public UserInfo findByEmail(String email){
+    public Persona findByEmail(String email){
         return userRepository.findByEmail(email);
     }
 
-    public UserInfo save(UserInfo registration){
-        UserInfo userInfo = new UserInfo();
-        userInfo.setEmail(registration.getEmail());
-        userInfo.setUsername(registration.getEmail());
-        userInfo.setRole(UserInfo.Role.ROLE_USER);
-        userInfo.setName(registration.getName());
-        userInfo.setTelefono(registration.getTelefono());
-        userInfo.setDocumento(registration.getDocumento());
-        userInfo.setPassword(passwordEncoder.encode(registration.getPassword()));
-        return userRepository.save(userInfo);
+    public Persona save(Persona registration){
+        Persona persona = new Persona();
+        persona.setEmail(registration.getEmail());
+        persona.setUsername(registration.getEmail());
+        persona.setRole(Persona.Role.ROLE_USER);
+        persona.setName(registration.getName());
+        persona.setTelefono(registration.getTelefono());
+        persona.setDocumento(registration.getDocumento());
+        persona.setPassword(passwordEncoder.encode(registration.getPassword()));
+        return userRepository.save(persona);
     }
 
     @Override
@@ -49,16 +49,16 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        UserInfo userInfo = userRepository.findByEmail(email);
-        if (userInfo == null){
+        Persona persona = userRepository.findByEmail(email);
+        if (persona == null){
             throw new UsernameNotFoundException("Invalid username or password.");
         }
-        return new org.springframework.security.core.userdetails.User(userInfo.getEmail(),
-        		userInfo.getPassword(),
-                mapRolesToAuthorities(Arrays.asList(userInfo.getRole())));
+        return new org.springframework.security.core.userdetails.User(persona.getEmail(),
+        		persona.getPassword(),
+                mapRolesToAuthorities(Arrays.asList(persona.getRole())));
     }
 
-    private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<com.memorynotfound.spring.security.model.UserInfo.Role> roles){
+    private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<com.memorynotfound.spring.security.model.Persona.Role> roles){
         return roles.stream()
                 .map(role -> new SimpleGrantedAuthority(role.toString()))
                 .collect(Collectors.toList());

@@ -1,7 +1,7 @@
 package com.memorynotfound.spring.security.web;
 
 import com.memorynotfound.spring.security.model.PasswordResetToken;
-import com.memorynotfound.spring.security.model.UserInfo;
+import com.memorynotfound.spring.security.model.Persona;
 import com.memorynotfound.spring.security.repository.PasswordResetTokenRepository;
 import com.memorynotfound.spring.security.service.UserService;
 import com.memorynotfound.spring.security.web.dto.PasswordResetDto;
@@ -60,9 +60,9 @@ public class PasswordResetController {
         }
 
         PasswordResetToken token = tokenRepository.findByToken(form.getToken());
-        UserInfo userInfo = token.getUser();
+        Persona persona = token.getUser();
         String updatedPassword = passwordEncoder.encode(form.getPassword());
-        userService.updatePassword(updatedPassword, userInfo.getId());
+        userService.updatePassword(updatedPassword, persona.getId());
         tokenRepository.delete(token);
         String url = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort();
         System.out.println(url);

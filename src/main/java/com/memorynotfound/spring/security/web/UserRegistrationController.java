@@ -1,6 +1,6 @@
 package com.memorynotfound.spring.security.web;
 
-import com.memorynotfound.spring.security.model.UserInfo;
+import com.memorynotfound.spring.security.model.Persona;
 import com.memorynotfound.spring.security.service.UserService;
 import com.memorynotfound.spring.security.web.dto.UserRegistrationDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +21,8 @@ public class UserRegistrationController {
     private UserService userService;
 
     @ModelAttribute("user")
-    public UserInfo userRegistrationDto() {
-        return new UserInfo();
+    public Persona userRegistrationDto() {
+        return new Persona();
     }
 
     @GetMapping
@@ -31,10 +31,10 @@ public class UserRegistrationController {
     }
 
     @PostMapping
-    public String registerUserAccount(@ModelAttribute("user") @Valid UserInfo userDto,
+    public String registerUserAccount(@ModelAttribute("user") @Valid Persona userDto,
                                       BindingResult result){
 
-        UserInfo existing = userService.findByEmail(userDto.getEmail());
+        Persona existing = userService.findByEmail(userDto.getEmail());
         if (existing != null){
             result.rejectValue("email", null, "There is already an account registered with that email");
         }

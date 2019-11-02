@@ -2,7 +2,7 @@ package com.memorynotfound.spring.security.web;
 
 import com.memorynotfound.spring.security.model.Mail;
 import com.memorynotfound.spring.security.model.PasswordResetToken;
-import com.memorynotfound.spring.security.model.UserInfo;
+import com.memorynotfound.spring.security.model.Persona;
 import com.memorynotfound.spring.security.repository.PasswordResetTokenRepository;
 import com.memorynotfound.spring.security.service.EmailService;
 import com.memorynotfound.spring.security.service.UserService;
@@ -48,27 +48,27 @@ public class PasswordForgotController {
             return "forgot-password";
         }
 
-        UserInfo userInfo = userService.findByEmail(form.getEmail());
-        if (userInfo == null){
+        Persona persona = userService.findByEmail(form.getEmail());
+        if (persona == null){
             result.rejectValue("email", null, "We could not find an account for that e-mail address.");
             return "forgot-password";
         }
 
         PasswordResetToken token = new PasswordResetToken();
         token.setToken(UUID.randomUUID().toString());
-        token.setUser(userInfo);
+        token.setUser(persona);
         token.setExpiryDate(30);
         tokenRepository.save(token);
 
         Mail mail = new Mail();
-        mail.setFrom("no-reply@memorynotfound.com");
-        mail.setTo(userInfo.getEmail());
-        mail.setSubject("Password reset request");
+        mail.setFrom("no-reply@sistemadaptativo.com");
+        mail.setTo(persona.getEmail());
+        mail.setSubject("Reiniciar contraseña");
 
         Map<String, Object> model = new HashMap<>();
         model.put("token", token);
-        model.put("user", userInfo);
-        model.put("signature", "https://alquilerautosrara.com");
+        model.put("user", persona);
+        model.put("signature", "https://sistemadaptativo.com");
         String url = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort();
         model.put("resetUrl", url + "/reset-password/reset-password?token=" + token.getToken());
         mail.setModel(model);

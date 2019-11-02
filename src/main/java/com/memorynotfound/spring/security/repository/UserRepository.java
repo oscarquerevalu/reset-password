@@ -1,6 +1,6 @@
 package com.memorynotfound.spring.security.repository;
 
-import com.memorynotfound.spring.security.model.UserInfo;
+import com.memorynotfound.spring.security.model.Persona;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -8,11 +8,11 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserRepository extends JpaRepository<UserInfo, Long> {
+public interface UserRepository extends JpaRepository<Persona, Long> {
 
-    UserInfo findByEmail(String email);
+    Persona findByEmail(String email);
 
     @Modifying(clearAutomatically = true)
-    @Query("update UserInfo u set u.password = :password where u.id = :id")
+    @Query("update Persona u set u.password = :password where u.id = :id")
     void updatePassword(@Param("password") String password, @Param("id") Long id);
 }
