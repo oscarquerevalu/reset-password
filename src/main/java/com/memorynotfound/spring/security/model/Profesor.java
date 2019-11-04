@@ -35,6 +35,9 @@ public class Profesor implements Serializable {
 	
 	@OneToMany(mappedBy="profesor")
     private List<Persona> personas;
+	
+	@OneToMany(mappedBy="profesor")
+    private List<Clase> clase;
 
 	public Profesor() {
 	}
@@ -59,5 +62,13 @@ public class Profesor implements Serializable {
 
 	public void setPersonas(List<Persona> personas) {
 		this.personas = personas;
+	}
+
+	public List<Clase> getClase() {
+		return clase;
+	}
+
+	public void setClase(List<Clase> clase) {
+		this.clase = clase;
 	}
 }

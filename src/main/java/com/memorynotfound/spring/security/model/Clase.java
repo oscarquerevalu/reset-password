@@ -2,9 +2,11 @@ package com.memorynotfound.spring.security.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,6 +14,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * Classe que representa o usuario do sistema
@@ -50,6 +55,14 @@ public class Clase implements Serializable {
 	    inverseJoinColumns = @JoinColumn(name = "id_recurso")
 	)
 	private List<RecursoDidactico> recursos = new ArrayList<RecursoDidactico>();
+	
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@Column
+	private Date fechaClase;
+	
+	@ManyToOne(optional=true)
+    @JoinColumn(name="id_profesor", referencedColumnName="id")
+	private Profesor profesor;
 
 	public Clase() {
 	}
@@ -84,7 +97,21 @@ public class Clase implements Serializable {
 	public void setRecursos(List<RecursoDidactico> recursos) {
 		this.recursos = recursos;
 	}
-	
-	
+
+	public Date getFechaClase() {
+		return fechaClase;
+	}
+
+	public void setFechaClase(Date fechaClase) {
+		this.fechaClase = fechaClase;
+	}
+
+	public Profesor getProfesor() {
+		return profesor;
+	}
+
+	public void setProfesor(Profesor profesor) {
+		this.profesor = profesor;
+	}
 	
 }
