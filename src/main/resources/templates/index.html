@@ -41,11 +41,18 @@
 				
 
                                 <div class="form-group">
-                                <h2>Bienvenido</h2>
-								<div sec:authentication="name" ></div>
-                                <label class="form-control">Fecha de clase</label>
-                                    	
-                                    	<input id="fechaConsulta" data-date-format="yyyy-mm-dd" class="form-control" width="276" placeholder="Confirmar fecha"  />
+	                                <h2>Bienvenido</h2>
+									<div sec:authentication="name" ></div>
+								</div>
+								<div class="form-group">
+	                                <label class="form-control">Fecha de clase</label>
+	                                <input id="fechaConsulta" data-date-format="yyyy-mm-dd" class="form-control" width="276" placeholder="Confirmar fecha"  />
+                                </div>
+                                <div class="form-group">
+                                	<label class="form-control">Sección</label>
+                                	<select disabled="disabled"> 
+                                		<option id="1" >3 años A</option>
+                                	</select>
                                 </div>
                                 <div class="form-group">
                                     <button type="button" onclick="consultar()" class="btn btn-success btn-block">Consultar</button>
@@ -97,10 +104,40 @@
 	        <h4 class="modal-title">Calificacion</h4>
 	      </div>
 	      <div class="modal-body">
-	        <p>Some text in the modal.</p>
+	      <div class="form-group">
+	      	<input type="hidden" id="idAlumno" name="idAlumno" />
+             <label class="form-control">Documento</label>
+             <input id="docAlumno" name="docAlumno" readonly="readonly" />
+            </div>
+	        <div class="form-group">
+             <label class="form-control">Nombre del Alumno</label>
+             <input id="nombreAlumno" name="nombreAlumno" readonly="readonly" />
+            </div>
+            <div class="form-group">
+             <label class="form-control">Actividad</label>
+             <select id="selActividad" name="selActividad">
+             	   <option value="" >---Seleccione---</option> 
+                   <option value="1" >Actidad 1</option>
+                   <option value="2" >Actidad 2</option>
+                   <option value="3" >Actidad 3</option>
+			</select>
+            </div>
+            <div class="form-group">
+             <label class="form-control">Recursos Didácticos</label>
+<!--              	<select id="selRecurso" name="selRecurso"> -->
+<!--              	</select> -->
+				<div id="dvRecurso"></div>
+            </div>
+            <div class="form-group">
+             <label class="form-control">¿Lo utilizó?</label>
+             	<input type="radio" name="utilizo" value="0"> SI</input>
+				<input type="radio" name="utilizo" value="1"> NO</input>
+            </div>
+            
 	      </div>
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	      	<button type="button" onclick="guardarRecurso()" class="btn btn-default" data-dismiss="modal">Guardar</button>
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
 	      </div>
 	    </div>
 	
@@ -111,15 +148,65 @@
     $(document).ready( function () {
 //    	 $('#fechaConsulta').datepicker();
    	$("#fechaConsulta").datepicker({ dateFormat: 'yy-mm-dd' });
+//    	var table = $('#alumnosTable').DataTable( {
+//    	    paging: false
+//    	} );
    });
     
     
-    function abrirCalificacion(id){
+    function abrirCalificacion(id, nombre, doc){
     	console.log(id);
+    	console.log(nombre);
+    	console.log(doc);
+    	$('#nombreAlumno').val(nombre);
+    	$('#docAlumno').val(doc);
     	$('#mdCalificacion').modal('show');
-    	
-    	
     }
+    
+    $('#selActividad').on('change', function() {
+    		$('#dvRecurso').empty();
+			if($('#selActividad').val() == '1'){
+// 				$('#selRecurso').append('<option value="1">Recurso 1A</option>');
+// 				$('#selRecurso').append('<option value="2">Recurso 1B</option>');
+// 				$('#selRecurso').append('<option value="3">Recurso 1C</option>');
+// 				$('#selRecurso').append('<option value="4">Recurso 1D</option>');
+				var check1 = $('<input type="checkbox" id="checkRecurso" name="checkRecurso" value="1"> Recurso 1A</input>');
+				var check2 = $('<input type="checkbox" id="checkRecurso" name="checkRecurso" value="2"> Recurso 1B</input>');
+				var check3 = $('<input type="checkbox" id="checkRecurso" name="checkRecurso" value="3"> Recurso 1C</input>');
+				var check4 = $('<input type="checkbox" id="checkRecurso" name="checkRecurso" value="4"> Recurso 1D</input>');
+				check1.appendTo('#dvRecurso');
+				check2.appendTo('#dvRecurso');
+				check3.appendTo('#dvRecurso');
+				check4.appendTo('#dvRecurso');
+			}else if($('#selActividad').val() == '2'){
+// 				$('#selRecurso').append('<option value="5">Recurso 2A</option>');
+// 				$('#selRecurso').append('<option value="6">Recurso 2B</option>');
+// 				$('#selRecurso').append('<option value="7">Recurso 2C</option>');
+// 				$('#selRecurso').append('<option value="8">Recurso 2D</option>');
+				var check1 = $('<input type="checkbox" id="checkRecurso" name="checkRecurso" value="5"> Recurso 2A</input>');
+				var check2 = $('<input type="checkbox" id="checkRecurso" name="checkRecurso" value="6"> Recurso 2B</input>');
+				var check3 = $('<input type="checkbox" id="checkRecurso" name="checkRecurso" value="7"> Recurso 2C</input>');
+				var check4 = $('<input type="checkbox" id="checkRecurso" name="checkRecurso" value="8"> Recurso 2D</input>');
+				check1.appendTo('#dvRecurso');
+				check2.appendTo('#dvRecurso');
+				check3.appendTo('#dvRecurso');
+				check4.appendTo('#dvRecurso');
+			}else if($('#selActividad').val() == '3'){
+// 				$('#selRecurso').append('<option value="9">Recurso 3A</option>');
+// 				$('#selRecurso').append('<option value="10">Recurso 3B</option>');
+// 				$('#selRecurso').append('<option value="11">Recurso 3C</option>');
+// 				$('#selRecurso').append('<option value="12">Recurso 3D</option>');
+				var check1 = $('<input type="checkbox" id="checkRecurso" name="checkRecurso" value="9"> Recurso 3A</input>');
+				var check2 = $('<input type="checkbox" id="checkRecurso" name="checkRecurso" value="10"> Recurso 3B</input>');
+				var check3 = $('<input type="checkbox" id="checkRecurso" name="checkRecurso" value="11"> Recurso 3C</input>');
+				var check4 = $('<input type="checkbox" id="checkRecurso" name="checkRecurso" value="12"> Recurso 3D</input>');
+				check1.appendTo('#dvRecurso');
+				check2.appendTo('#dvRecurso');
+				check3.appendTo('#dvRecurso');
+				check4.appendTo('#dvRecurso');
+			}
+    		 
+    	});
     
     function consultar(){
 //     	$.ajax({
@@ -131,7 +218,7 @@
 //     	        console.log("No se ha podido obtener la información");
 //     	    }
 //     	});
-//     	$('#alumnosTable').destroy();
+//     	$('#alumnosTable').empty();
 //         $('#myTable').empty();
 
 		var formattedDate = new Date($('#fechaConsulta').val());
@@ -140,11 +227,13 @@
 		m += 1;  // JavaScript months are 0-11
 		var y = formattedDate.getFullYear();
 		
-		$("#fechaConsulta").val(d + "." + m + "." + y);
+		var fecha = d + "." + m + "." + y;
     	var table = $('#alumnosTable').DataTable({
-   			"sAjaxSource": "/alumno/listalumnos/"+$('#fechaConsulta').val(),
+   			"sAjaxSource": "/alumno/listalumnos/"+fecha,
    			"sAjaxDataProp": "",
    			"order": [[ 0, "asc" ]],
+   			"paging": false,
+   			"bDestroy": true,
    			"aoColumns": [
    			    { "mData": "id"},
    			 	{ "mData": "persona.documento" },
@@ -153,7 +242,7 @@
    				{ "mData": "persona.telefono" },
    				{ "mData": "calificado" },
    	            {"mRender": function (data, type, full) {
-                 return '<a href="#" onclick="abrirCalificacion('+full.id+')" class="btn btn-primary ImprimirTicket">Calificar</a>'
+                 return '<a href="#" onclick="abrirCalificacion('+full.id+',\''+full.persona.name+'\','+full.persona.documento+')" class="btn btn-primary ImprimirTicket">Calificar</a>'
                  }
    	            }
    			],
