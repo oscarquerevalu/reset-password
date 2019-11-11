@@ -10,7 +10,9 @@ INSERT INTO `db_eduini`.`recurso_didactico` (`nombre`, `peso`, `id_estilo`) VALU
 INSERT INTO `db_eduini`.`recurso_didactico` (`nombre`, `peso`, `id_estilo`) VALUES ('Reproductor de sonido', '1', '5');
 INSERT INTO `db_eduini`.`recurso_didactico` (`nombre`, `peso`, `id_estilo`) VALUES ('Telefono', '1', '1');
 INSERT INTO `db_eduini`.`recurso_didactico` (`nombre`, `peso`, `id_estilo`) VALUES ('Pelota', '1', '4');
-INSERT INTO `db_eduini`.`recurso_didactico` (`nombre`, `peso`, `id_estilo`) VALUES ('Puzle', '1', '2');
+INSERT INTO `db_eduini`.`recurso_didactico` (`nombre`, `peso`, `id_estilo`) VALUES ('Puzzle', '1', '2');
 INSERT INTO `db_eduini`.`recurso_didactico` (`nombre`, `peso`, `id_estilo`) VALUES ('Flores', '1', '8');
 INSERT INTO `db_eduini`.`recurso_didactico` (`nombre`, `peso`, `id_estilo`) VALUES ('Libro', '1', '7');
 INSERT INTO `db_eduini`.`recurso_didactico` (`nombre`, `peso`, `id_estilo`) VALUES ('Castillo', '1', '6');
+
+--considerar tabla de actividades

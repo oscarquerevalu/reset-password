@@ -9,6 +9,7 @@ public class MainController {
 
     @GetMapping("/")
     public String root() {
+    	System.out.println("--------------------INDEX");
         return "index";
     }
 
@@ -19,6 +20,7 @@ public class MainController {
 
     @GetMapping("/user")
     public String userIndex() {
+    	System.out.println("--------------------USER");
         return "user/index";
     }
 }

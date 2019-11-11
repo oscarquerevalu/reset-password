@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -7,16 +7,160 @@
 
     <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}"/>
-
-    <title>Registro</title>
+	<meta charset="utf-8" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css"/>
+	<script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+	<script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+    <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+<!-- 	<script src="/js/datatable.js"></script> -->
+    <title>Registro de Clase</title>
 </head>
 <body>
-<div class="container">
-    <h1>Bienvenidos al Sistema adaptativo predictivo</h1>
+	
+	
+	
+	<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-1">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="text-center">  
+                        <h3><i class="glyphicon glyphicon-user" style="font-size:2em;"></i></h3>
+                        <h2 class="text-center">Registro de Clase</h2>
+                        <div class="panel-body">
+                            <div th:if="${param.success}">
+                                <div class="alert alert-info">
+                                    !Se registro la clase satisfactoriamente!
+                                </div>
+                            </div>
+
+                            <form id="frmClase" method="post">
+				
+
+                                <div class="form-group">
+                                <h2>Bienvenido</h2>
+								<div sec:authentication="name" ></div>
+                                <label class="form-control">Fecha de clase</label>
+                                    	
+                                    	<input id="fechaConsulta" data-date-format="yyyy-mm-dd" class="form-control" width="276" placeholder="Confirmar fecha"  />
+                                </div>
+                                <div class="form-group">
+                                    <button type="button" onclick="consultar()" class="btn btn-success btn-block">Consultar</button>
+                                </div>
+                            </form>
+							<table id="alumnosTable" class="display">
+      
+						       <!-- Header Table -->
+						       <thead>
+						            <tr>
+						                <th>Id</th>
+										<th>Documento</th>
+						                <th>Nombre</th>
+						                <th>Email</th>
+						                <th>Telefono</th>
+						                <th>¿Calificado?</th>
+						                <th>Calificar</th>
+						            </tr>
+						        </thead>
+						        <!-- Footer Table -->
+						        <tfoot>
+						            <tr>
+						                <th>Id</th>
+										<th>Documento</th>
+						                <th>Nombre</th>
+						                <th>Email</th>
+						                <th>Telefono</th>
+						                <th>¿Calificado?</th>
+						                <th>Calificar</th>
+						            </tr>
+						        </tfoot>
+						    </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+    
+    <!-- Modal -->
+	<div id="mdCalificacion" class="modal fade" role="dialog">
+	  <div class="modal-dialog">
+	
+	    <!-- Modal content-->
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal">&times;</button>
+	        <h4 class="modal-title">Calificacion</h4>
+	      </div>
+	      <div class="modal-body">
+	        <p>Some text in the modal.</p>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	      </div>
+	    </div>
+	
+	  </div>
+	 </div>
+    <script type="text/javascript">
+    var table;
+    $(document).ready( function () {
+//    	 $('#fechaConsulta').datepicker();
+   	$("#fechaConsulta").datepicker({ dateFormat: 'yy-mm-dd' });
+   });
+    
+    
+    function abrirCalificacion(id){
+    	console.log(id);
+    	$('#mdCalificacion').modal('show');
+    	
+    	
+    }
+    
+    function consultar(){
+//     	$.ajax({
+//     		url: 'http://localhost:8080/alumno/listalumnos/'+$('#fechaConsulta').val(),
+//     		success: function(respuesta) {
+//     			console.log(respuesta);
+//     		},
+//     		error: function() {
+//     	        console.log("No se ha podido obtener la información");
+//     	    }
+//     	});
+//     	$('#alumnosTable').destroy();
+//         $('#myTable').empty();
 
-<script type="text/javascript" th:src="@{/webjars/jquery/3.2.1/jquery.min.js/}"></script>
-<script type="text/javascript" th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
-
+		var formattedDate = new Date($('#fechaConsulta').val());
+		var d = formattedDate.getDate();
+		var m =  formattedDate.getMonth();
+		m += 1;  // JavaScript months are 0-11
+		var y = formattedDate.getFullYear();
+		
+		$("#fechaConsulta").val(d + "." + m + "." + y);
+    	var table = $('#alumnosTable').DataTable({
+   			"sAjaxSource": "/alumno/listalumnos/"+$('#fechaConsulta').val(),
+   			"sAjaxDataProp": "",
+   			"order": [[ 0, "asc" ]],
+   			"aoColumns": [
+   			    { "mData": "id"},
+   			 	{ "mData": "persona.documento" },
+   			 	{ "mData": "persona.name" },   				  
+   				{ "mData": "persona.email" },
+   				{ "mData": "persona.telefono" },
+   				{ "mData": "calificado" },
+   	            {"mRender": function (data, type, full) {
+                 return '<a href="#" onclick="abrirCalificacion('+full.id+')" class="btn btn-primary ImprimirTicket">Calificar</a>'
+                 }
+   	            }
+   			],
+   			
+   	 })
+    }
+    
+    </script>
 </body>
 </html>

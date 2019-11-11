@@ -8,6 +8,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -36,10 +37,7 @@ public class Clase implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
-	@ManyToMany(cascade = {
-	        CascadeType.PERSIST,
-	        CascadeType.MERGE
-	    })
+	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "alumno_clase",
 	    joinColumns = @JoinColumn(name = "id_clase"),
 	    inverseJoinColumns = @JoinColumn(name = "id_alumno")
