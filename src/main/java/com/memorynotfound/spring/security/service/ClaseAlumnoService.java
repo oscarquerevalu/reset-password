@@ -7,6 +7,7 @@ import com.memorynotfound.spring.security.model.ClaseAlumno;
 public interface ClaseAlumnoService {
 
     List<ClaseAlumno> findByAll();
-    List<ClaseAlumno> findByFecha(String fecha);
+    List<ClaseAlumno> findByFechaIdAlumno(String fecha, Long idAlumno);
+    ClaseAlumno guardar(ClaseAlumno claseAlumno);
 
 }

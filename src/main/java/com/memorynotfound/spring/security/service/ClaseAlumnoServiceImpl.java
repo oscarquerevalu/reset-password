@@ -24,8 +24,14 @@ public class ClaseAlumnoServiceImpl implements ClaseAlumnoService {
 	}
 	
 	@Override
-	public List<ClaseAlumno> findByFecha(String fecha) {
+	public List<ClaseAlumno> findByFechaIdAlumno(String fecha, Long idAlumno) {
 		// TODO Auto-generated method stub
-		return claseAlumnoRepository.findByFecha(fecha);
+		return claseAlumnoRepository.findByFechaIdAlumno(fecha,idAlumno);
+	}
+
+	@Override
+	public ClaseAlumno guardar(ClaseAlumno claseAlumno) {
+		// TODO Auto-generated method stub
+		return claseAlumnoRepository.saveAndFlush(claseAlumno);
 	}
 }

@@ -12,8 +12,8 @@ import com.memorynotfound.spring.security.model.ClaseAlumno;
 @Repository
 public interface ClaseAlumnoRepository extends JpaRepository<ClaseAlumno, Long> {
 	
-	@Query("select c from ClaseAlumno c where c.fecha = :fecha")
-	List<ClaseAlumno> findByFecha(@Param("fecha") String fecha);
+	@Query("select c from ClaseAlumno c where c.fecha = :fecha and c.id_alumno = :idAlumno")
+	List<ClaseAlumno> findByFechaIdAlumno(@Param("fecha") String fecha, @Param("idAlumno") Long idAlumno);
 
 }
 

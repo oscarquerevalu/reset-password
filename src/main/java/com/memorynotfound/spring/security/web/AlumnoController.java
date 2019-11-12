@@ -4,11 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,7 +23,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.memorynotfound.spring.security.model.Alumno;
 import com.memorynotfound.spring.security.model.Clase;
 import com.memorynotfound.spring.security.model.ClaseAlumno;
+import com.memorynotfound.spring.security.model.ClaseAlumnoActividades;
+import com.memorynotfound.spring.security.model.Persona;
 import com.memorynotfound.spring.security.service.AlumnoService;
+import com.memorynotfound.spring.security.service.ClaseAlumnoActividadesService;
 import com.memorynotfound.spring.security.service.ClaseAlumnoService;
 import com.memorynotfound.spring.security.service.PersonaService;
 
@@ -35,6 +44,9 @@ public class AlumnoController {
     
     @Autowired
     private ClaseAlumnoService claseAlumnoService;
+    
+    @Autowired
+    private ClaseAlumnoActividadesService claseAlumnoActividadesService;
     
     @Autowired
     private PersonaService personaService;
@@ -83,7 +95,7 @@ public class AlumnoController {
     			
     			//Buscar si se encuentra calificado
     			listaClaseAlumno = new ArrayList<ClaseAlumno>();
-    			listaClaseAlumno = claseAlumnoService.findByFecha(fecha);
+    			listaClaseAlumno = claseAlumnoService.findByFechaIdAlumno(fecha,alumno.getId());
     			if(listaClaseAlumno!=null && listaClaseAlumno.size()>0)
     				alumno.setCalificado("SI");
     			else
@@ -94,6 +106,30 @@ public class AlumnoController {
 			// TODO: handle exception
 		}
 		return listaAlumnos;
+    }
+    
+    @ApiOperation(value = "Graba datos de clase")
+    @PostMapping("/grabarClase")
+    public String create(@RequestBody Map<String, String> body){
+    	
+    	ClaseAlumno claseAlumno = new ClaseAlumno();
+    	claseAlumno.setFecha(body.get("fecha"));
+    	claseAlumno.setId_alumno(new Long(body.get("idAlumno")));
+    	claseAlumno.setId_clase(new Long("1"));
+    	ClaseAlumno claseAlumnoResp= claseAlumnoService.guardar(claseAlumno);
+    	
+    	String[] recursos = body.get("recursos").split(",");
+    	
+    	for (String rec : recursos) {
+    		ClaseAlumnoActividades claseAlumnoActividades = new ClaseAlumnoActividades();
+    		claseAlumnoActividades.setId_actividad(new Long(body.get("actividad")));
+    		claseAlumnoActividades.setId_clasealumno(claseAlumnoResp.getId());
+    		claseAlumnoActividades.setId_recurso(new Long(rec));
+    		claseAlumnoActividadesService.guardarActividad(claseAlumnoActividades);
+		}
+    	
+    	
+    	return "";
     }
     
 	
