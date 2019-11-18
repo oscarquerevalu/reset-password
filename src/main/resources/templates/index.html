@@ -14,6 +14,7 @@
 	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css"/>
 	<script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
 	<script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.0/dist/tf.min.js"></script>
     <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
 <!-- 	<script src="/js/datatable.js"></script> -->
     <title>Registro de Clase</title>
@@ -56,6 +57,7 @@
                                 </div>
                                 <div class="form-group">
                                     <button type="button" onclick="consultar()" class="btn btn-success btn-block">Consultar</button>
+                                    <button type="button" onclick="intento()" class="btn btn-success btn-block">Intentar</button>
                                 </div>
                             </form>
 							<table id="alumnosTable" class="display">
@@ -172,10 +174,10 @@
 // 				$('#selRecurso').append('<option value="2">Recurso 1B</option>');
 // 				$('#selRecurso').append('<option value="3">Recurso 1C</option>');
 // 				$('#selRecurso').append('<option value="4">Recurso 1D</option>');
-				var check1 = $('<input type="checkbox" id="checkRecurso" name="checkRecurso" value="1"> Recurso 1A</input>');
-				var check2 = $('<input type="checkbox" id="checkRecurso" name="checkRecurso" value="2"> Recurso 1B</input>');
-				var check3 = $('<input type="checkbox" id="checkRecurso" name="checkRecurso" value="3"> Recurso 1C</input>');
-				var check4 = $('<input type="checkbox" id="checkRecurso" name="checkRecurso" value="4"> Recurso 1D</input>');
+				var check1 = $('<input type="checkbox" id="checkRecurso" name="checkRecurso" value="1"> Recurso 1A</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang1"></input>');
+				var check2 = $('<input type="checkbox" id="checkRecurso" name="checkRecurso" value="2"> Recurso 1B</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang2"></input>');
+				var check3 = $('<input type="checkbox" id="checkRecurso" name="checkRecurso" value="3"> Recurso 1C</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang3"></input>');
+				var check4 = $('<input type="checkbox" id="checkRecurso" name="checkRecurso" value="4"> Recurso 1D</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang4"></input>');
 				check1.appendTo('#dvRecurso');
 				check2.appendTo('#dvRecurso');
 				check3.appendTo('#dvRecurso');
@@ -185,10 +187,10 @@
 // 				$('#selRecurso').append('<option value="6">Recurso 2B</option>');
 // 				$('#selRecurso').append('<option value="7">Recurso 2C</option>');
 // 				$('#selRecurso').append('<option value="8">Recurso 2D</option>');
-				var check1 = $('<input type="checkbox" id="checkRecurso" name="checkRecurso" value="5"> Recurso 2A</input>');
-				var check2 = $('<input type="checkbox" id="checkRecurso" name="checkRecurso" value="6"> Recurso 2B</input>');
-				var check3 = $('<input type="checkbox" id="checkRecurso" name="checkRecurso" value="7"> Recurso 2C</input>');
-				var check4 = $('<input type="checkbox" id="checkRecurso" name="checkRecurso" value="8"> Recurso 2D</input>');
+				var check1 = $('<input type="checkbox" id="checkRecurso" name="checkRecurso" value="5"> Recurso 2A</input> <input type="range" min="0" max="1" value="0" class="slider" id="rang5"></input>');
+				var check2 = $('<input type="checkbox" id="checkRecurso" name="checkRecurso" value="6"> Recurso 2B</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang6"></input>');
+				var check3 = $('<input type="checkbox" id="checkRecurso" name="checkRecurso" value="7"> Recurso 2C</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang7"></input>');
+				var check4 = $('<input type="checkbox" id="checkRecurso" name="checkRecurso" value="8"> Recurso 2D</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang8"></input>');
 				check1.appendTo('#dvRecurso');
 				check2.appendTo('#dvRecurso');
 				check3.appendTo('#dvRecurso');
@@ -198,10 +200,10 @@
 // 				$('#selRecurso').append('<option value="10">Recurso 3B</option>');
 // 				$('#selRecurso').append('<option value="11">Recurso 3C</option>');
 // 				$('#selRecurso').append('<option value="12">Recurso 3D</option>');
-				var check1 = $('<input type="checkbox" id="checkRecurso" name="checkRecurso" value="9"> Recurso 3A</input>');
-				var check2 = $('<input type="checkbox" id="checkRecurso" name="checkRecurso" value="10"> Recurso 3B</input>');
-				var check3 = $('<input type="checkbox" id="checkRecurso" name="checkRecurso" value="11"> Recurso 3C</input>');
-				var check4 = $('<input type="checkbox" id="checkRecurso" name="checkRecurso" value="12"> Recurso 3D</input>');
+				var check1 = $('<input type="checkbox" id="checkRecurso" name="checkRecurso" value="9"> Recurso 3A</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang9"> </input>');
+				var check2 = $('<input type="checkbox" id="checkRecurso" name="checkRecurso" value="10"> Recurso 3B</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang10"> </input>');
+				var check3 = $('<input type="checkbox" id="checkRecurso" name="checkRecurso" value="11"> Recurso 3C</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang11"> </input>');
+				var check4 = $('<input type="checkbox" id="checkRecurso" name="checkRecurso" value="12"> Recurso 3D</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang12"> </input>');
 				check1.appendTo('#dvRecurso');
 				check2.appendTo('#dvRecurso');
 				check3.appendTo('#dvRecurso');
@@ -297,6 +299,89 @@
 
     }
     
+    
+ // **************************************
+ // *  Tensorflow - Estilos aprendizaje  *
+ // **************************************
+
+ // console.log('Redes neuronales');
+ // tf.tensor([2,4,1,7,5,2], [2,3]).print();
+
+ // Creamos el modelo
+ const model = tf.sequential();
+ // Capa oculta
+ const hidden = tf.layers.dense({
+     units: 4,
+     inputShape: [6],
+     activation: "sigmoid"
+ });
+ // Agregamos la capa oculta al modelo
+ model.add(hidden);
+ // Capa de salida
+ const output = tf.layers.dense({
+     units: 3,
+     activation: "sigmoid"
+ });
+ // Agregamos la capa de salida al modelo
+ model.add(output);
+
+ // Optimizador 
+ // mientras mayor el nro mayor el costo para el equipo
+ const sgdOptions = tf.train.sgd(0.1); 
+ // Compilamos el modelo
+ // model.compiler({
+//      optimizer: sgdOptions,
+//      loss: tf.losses.meanSquaredError /*Asignamos la forma de reducir la perdida*/
+ // });
+ // meanSquaredError: evita que las perdidas sean negativas
+ // elevando todas las perdidas al cuadrado asi volverlas +
+
+ // Datos:
+ const xArray = [
+     [0,0,0,0,1,1],  
+     [0,0,0,1,1,0],
+     [1,1,0,0,0,0],
+     [0,1,1,0,0,0],
+     [0,0,1,1,0,0],
+     [0,0,1,1,1,0],
+   ];
+ const yArray = [
+     [0,0,1], /**visual */
+     [0,0,1], /**visual */
+     [1,0,0], /**logico */
+     [1,0,0], /**logico */
+     [0,1,0], /**corporal */
+     [0,1,1], /**corporal */
+ ];
+ // Create a dataset from the JavaScript array
+ const xDataset = tf.data.array(xArray);
+ const yDataset = tf.data.array(yArray);
+
+ const xyDataset = tf.data.zip({xs: xDataset, ys: yDataset})
+                 .batch(4)
+                 .shuffle(4);
+
+ async function intento() {
+     model.compile({optimizer: sgdOptions, loss: 'meanSquaredError'});    
+     const history = await model.fitDataset(xyDataset, {
+                         epochs: 1000,
+                         callbacks: {onEpochEnd: (epoch, logs) => console.log(logs.loss)}
+                     });
+     // Se ejecuta la modelo de la red con 100 iteraciones
+     // bajo la tecnica de descenso de gradiente buscando minizar el error a cero
+     console.log('history', history.history.loss[0]);
+
+     // const xs = tf.tensor([0,0,0,0,1,1]);
+     // let pred = model.predict(tf.tensor1d([0, 0, 0, 0, 1, 0])).print();
+     // var readable_output = pred.dataSync();
+     // console.log(readable_output);
+
+     // const result = await model.evaluate([0, 0, 0, 0, 1, 0], outputs, {batchSize: 64});
+     // console.log('Accuracy is:')
+     // result[1].print()
+ }
+
+ // intento();
     </script>
 </body>
 </html>
