@@ -18,6 +18,42 @@
     <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
 <!-- 	<script src="/js/datatable.js"></script> -->
     <title>Registro de Clase</title>
+    <style>
+.slidecontainer {
+  width: 100%;
+}
+
+.slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 25px;
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.slider:hover {
+  opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  background: #4CAF50;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  background: #4CAF50;
+  cursor: pointer;
+}
+</style>
 </head>
 <body>
 	
@@ -174,40 +210,77 @@
 // 				$('#selRecurso').append('<option value="2">Recurso 1B</option>');
 // 				$('#selRecurso').append('<option value="3">Recurso 1C</option>');
 // 				$('#selRecurso').append('<option value="4">Recurso 1D</option>');
-				var check1 = $('<input type="checkbox" id="checkRecurso" name="checkRecurso" value="1"> Recurso 1A</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang1"></input>');
-				var check2 = $('<input type="checkbox" id="checkRecurso" name="checkRecurso" value="2"> Recurso 1B</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang2"></input>');
-				var check3 = $('<input type="checkbox" id="checkRecurso" name="checkRecurso" value="3"> Recurso 1C</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang3"></input>');
-				var check4 = $('<input type="checkbox" id="checkRecurso" name="checkRecurso" value="4"> Recurso 1D</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang4"></input>');
+				var check1 = $('<div><input type="checkbox" id="checkRecurso" name="checkRecurso" value="1"> Recurso 1A</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang1"></input><label id="rangeText1">Valor: 0</label></div>');
+				var check2 = $('<div><input type="checkbox" id="checkRecurso" name="checkRecurso" value="2"> Recurso 1B</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang2"></input><label id="rangeText2">Valor: 0</label></div>');
+				var check3 = $('<div><input type="checkbox" id="checkRecurso" name="checkRecurso" value="3"> Recurso 1C</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang3"></input><label id="rangeText3">Valor: 0</label></div>');
+				var check4 = $('<div><input type="checkbox" id="checkRecurso" name="checkRecurso" value="4"> Recurso 1D</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang4"></input><label id="rangeText4">Valor: 0</label></div>');
 				check1.appendTo('#dvRecurso');
 				check2.appendTo('#dvRecurso');
 				check3.appendTo('#dvRecurso');
 				check4.appendTo('#dvRecurso');
+				
+				$('#rang1').on('input change', function () {
+			        $('#rangeText1').text("Valor: "+$(this).val());
+			    });
+				$('#rang2').on('input change', function () {
+			        $('#rangeText2').text("Valor: "+$(this).val());
+			    });
+				$('#rang3').on('input change', function () {
+			        $('#rangeText3').text("Valor: "+$(this).val());
+			    });
+				$('#rang4').on('input change', function () {
+			        $('#rangeText4').text("Valor: "+$(this).val());
+			    });
 			}else if($('#selActividad').val() == '2'){
 // 				$('#selRecurso').append('<option value="5">Recurso 2A</option>');
 // 				$('#selRecurso').append('<option value="6">Recurso 2B</option>');
 // 				$('#selRecurso').append('<option value="7">Recurso 2C</option>');
 // 				$('#selRecurso').append('<option value="8">Recurso 2D</option>');
-				var check1 = $('<input type="checkbox" id="checkRecurso" name="checkRecurso" value="5"> Recurso 2A</input> <input type="range" min="0" max="1" value="0" class="slider" id="rang5"></input>');
-				var check2 = $('<input type="checkbox" id="checkRecurso" name="checkRecurso" value="6"> Recurso 2B</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang6"></input>');
-				var check3 = $('<input type="checkbox" id="checkRecurso" name="checkRecurso" value="7"> Recurso 2C</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang7"></input>');
-				var check4 = $('<input type="checkbox" id="checkRecurso" name="checkRecurso" value="8"> Recurso 2D</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang8"></input>');
+				var check1 = $('<div><input type="checkbox" id="checkRecurso" name="checkRecurso" value="5"> Recurso 2A</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang5"></input><label id="rangeText5" value="Valor: 0" /></div>');
+				var check2 = $('<div><input type="checkbox" id="checkRecurso" name="checkRecurso" value="6"> Recurso 2B</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang6"></input><label id="rangeText6" value="Valor: 0" /></div>');
+				var check3 = $('<div><input type="checkbox" id="checkRecurso" name="checkRecurso" value="7"> Recurso 2C</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang7"></input><label id="rangeText7" value="Valor: 0" /></div>');
+				var check4 = $('<div><input type="checkbox" id="checkRecurso" name="checkRecurso" value="8"> Recurso 2D</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang8"></input><label id="rangeText8" value="Valor: 0" /></div>');
 				check1.appendTo('#dvRecurso');
 				check2.appendTo('#dvRecurso');
 				check3.appendTo('#dvRecurso');
 				check4.appendTo('#dvRecurso');
+				$('#rang5').on('input change', function () {
+			        $('#rangeText5').text("Valor: "+$(this).val());
+			    });
+				$('#rang6').on('input change', function () {
+			        $('#rangeText6').text("Valor: "+$(this).val());
+			    });
+				$('#rang7').on('input change', function () {
+			        $('#rangeText7').text("Valor: "+$(this).val());
+			    });
+				$('#rang8').on('input change', function () {
+			        $('#rangeText8').text("Valor: "+$(this).val());
+			    });
 			}else if($('#selActividad').val() == '3'){
 // 				$('#selRecurso').append('<option value="9">Recurso 3A</option>');
 // 				$('#selRecurso').append('<option value="10">Recurso 3B</option>');
 // 				$('#selRecurso').append('<option value="11">Recurso 3C</option>');
 // 				$('#selRecurso').append('<option value="12">Recurso 3D</option>');
-				var check1 = $('<input type="checkbox" id="checkRecurso" name="checkRecurso" value="9"> Recurso 3A</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang9"> </input>');
-				var check2 = $('<input type="checkbox" id="checkRecurso" name="checkRecurso" value="10"> Recurso 3B</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang10"> </input>');
-				var check3 = $('<input type="checkbox" id="checkRecurso" name="checkRecurso" value="11"> Recurso 3C</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang11"> </input>');
-				var check4 = $('<input type="checkbox" id="checkRecurso" name="checkRecurso" value="12"> Recurso 3D</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang12"> </input>');
+				var check1 = $('<div><input type="checkbox" id="checkRecurso" name="checkRecurso" value="9"> Recurso 3A</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang9"> </input><label id="rangeText9" value="Valor: 0" /></div>');
+				var check2 = $('<div><input type="checkbox" id="checkRecurso" name="checkRecurso" value="10"> Recurso 3B</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang10"> </input><label id="rangeText10" value="Valor: 0" /></div>');
+				var check3 = $('<div><input type="checkbox" id="checkRecurso" name="checkRecurso" value="11"> Recurso 3C</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang11"> </input><label id="rangeText11" value="Valor: 0" /></div>');
+				var check4 = $('<div><input type="checkbox" id="checkRecurso" name="checkRecurso" value="12"> Recurso 3D</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang12"> </input><label id="rangeText12" value="Valor: 0" /></div>');
 				check1.appendTo('#dvRecurso');
 				check2.appendTo('#dvRecurso');
 				check3.appendTo('#dvRecurso');
 				check4.appendTo('#dvRecurso');
+				$('#rang9').on('input change', function () {
+			        $('#rangeText9').text("Valor: "+$(this).val());
+			    });
+				$('#rang10').on('input change', function () {
+			        $('#rangeText10').text("Valor: "+$(this).val());
+			    });
+				$('#rang11').on('input change', function () {
+			        $('#rangeText11').text("Valor: "+$(this).val());
+			    });
+				$('#rang12').on('input change', function () {
+			        $('#rangeText12').text("Valor: "+$(this).val());
+			    });
 			}
     		 
     	});
@@ -265,6 +338,7 @@
 		var fech = "" + d + m + y;
 		
 		var recursos = [];
+		var valores = "";
 		var rsc = "";
 		
 		$.each($("input[name='checkRecurso']:checked"), function(){
@@ -274,15 +348,17 @@
 		$.each(recursos, function( index, value ) {
 			  if(index==0){
 					rsc = recursos[index];
+					valores= $('#rang'+recursos[index]).val()
 				}else{
 					rsc += ","+ recursos[index];
+					valores += ","+ $('#rang'+recursos[index]).val()
 				}
 			});
 		
     	$.ajax({
     		url: 'http://localhost:8080/alumno/grabarClase',
     		type:"POST",
-    		data:JSON.stringify({"fecha":fech, "idAlumno":$('#idAlumno').val(), "actividad":$('#selActividad').val(), "recursos":rsc }),
+    		data:JSON.stringify({"fecha":fech, "idAlumno":$('#idAlumno').val(), "actividad":$('#selActividad').val(), "recursos":rsc, "valores":valores }),
     		contentType:"application/json; charset=utf-8",
     		dataType:"json",
     		success: function(respuesta) {

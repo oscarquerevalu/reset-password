@@ -41,7 +41,7 @@ public class ClaseAlumnoActividades implements Serializable {
 	private Long id_recurso;
 	
 	@Column
-	private Boolean valor;
+	private Double valor;
 	
 	public ClaseAlumnoActividades() {
 	}
@@ -78,12 +78,11 @@ public class ClaseAlumnoActividades implements Serializable {
 		this.id_recurso = id_recurso;
 	}
 
-	public Boolean getValor() {
+	public Double getValor() {
 		return valor;
 	}
 
-	public void setValor(Boolean valor) {
+	public void setValor(Double valor) {
 		this.valor = valor;
 	}
-	
 }

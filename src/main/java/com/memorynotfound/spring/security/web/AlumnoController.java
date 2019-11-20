@@ -119,12 +119,15 @@ public class AlumnoController {
     	ClaseAlumno claseAlumnoResp= claseAlumnoService.guardar(claseAlumno);
     	
     	String[] recursos = body.get("recursos").split(",");
+    	String[] valores = body.get("valores").split(",");
     	
-    	for (String rec : recursos) {
+    	for (int i = 0; i < recursos.length; i++) {
+    		String rec = recursos[i];
     		ClaseAlumnoActividades claseAlumnoActividades = new ClaseAlumnoActividades();
     		claseAlumnoActividades.setId_actividad(new Long(body.get("actividad")));
     		claseAlumnoActividades.setId_clasealumno(claseAlumnoResp.getId());
     		claseAlumnoActividades.setId_recurso(new Long(rec));
+    		claseAlumnoActividades.setValor((new Double(valores[i]))/100);
     		claseAlumnoActividadesService.guardarActividad(claseAlumnoActividades);
 		}
     	
