@@ -8,5 +8,6 @@ import com.memorynotfound.spring.security.model.ClaseAlumnoActividades;
 public interface ClaseAlumnoActividadesService {
 
 	void guardarActividad(ClaseAlumnoActividades c);
+	List<ClaseAlumnoActividades> findAll();
 
 }

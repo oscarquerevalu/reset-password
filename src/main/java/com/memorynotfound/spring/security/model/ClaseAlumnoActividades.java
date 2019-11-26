@@ -1,6 +1,7 @@
 package com.memorynotfound.spring.security.model;
 
 import java.io.Serializable;
+import java.util.Comparator;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -85,4 +86,14 @@ public class ClaseAlumnoActividades implements Serializable {
 	public void setValor(Double valor) {
 		this.valor = valor;
 	}
+	
+    public static Comparator<ClaseAlumnoActividades> claseAlumnoActividadesComparator = new Comparator<ClaseAlumnoActividades>() {
+
+	public int compare(ClaseAlumnoActividades s1, ClaseAlumnoActividades s2) {
+		Long StudentName1 = s1.id_recurso;
+		Long StudentName2 = s2.id_recurso;
+
+	   //ascending order
+	   return StudentName1.compareTo(StudentName2);
+    }};
 }

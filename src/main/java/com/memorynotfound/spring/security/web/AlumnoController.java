@@ -1,6 +1,8 @@
 package com.memorynotfound.spring.security.web;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -130,9 +132,55 @@ public class AlumnoController {
     		claseAlumnoActividades.setValor((new Double(valores[i]))/100);
     		claseAlumnoActividadesService.guardarActividad(claseAlumnoActividades);
 		}
-    	
-    	
     	return "";
+    }
+    
+    @GetMapping(value="/promRecursos", produces=MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Ver promedio de recursos ")
+    public List<Map<String, Object>>  promRecursos(Model model) {
+    	
+    	List<Map<String, Object>> listReturn = new ArrayList<Map<String,Object>>(); 
+    	Map<String, Object> promedio = new HashMap<String, Object>();
+    	List<ClaseAlumnoActividades> claseAlumnoActividades = new ArrayList<ClaseAlumnoActividades>();
+    	try {
+    		claseAlumnoActividades = claseAlumnoActividadesService.findAll();
+    		Collections.sort(claseAlumnoActividades, ClaseAlumnoActividades.claseAlumnoActividadesComparator);
+    		
+    		Long id_recurso = 0L;
+    		Double sum = new Double(0);
+    		int cant = 0;
+    		for (ClaseAlumnoActividades actividad : claseAlumnoActividades) {
+    			
+    			if(id_recurso.equals(0L)) {
+    				id_recurso = actividad.getId_recurso();
+    			}
+    			
+    			if(id_recurso.compareTo(actividad.getId_recurso()) == 0) {
+    				cant++;
+    				sum += actividad.getValor()!=null?actividad.getValor():new Double(0);
+    			}else {
+    				Double prom = !sum.equals(new Double(0)) && cant != 0? sum/cant:0;
+    				promedio = new HashMap<String, Object>();
+    				promedio.put("index", id_recurso);
+    				promedio.put("value", prom);
+    				listReturn.add(promedio);
+    				id_recurso = actividad.getId_recurso();
+    				cant=1;
+    				sum = actividad.getValor()!=null?actividad.getValor():new Double(0);
+    			}
+			} 
+    		
+    		if(cant==1) {
+    			Double prom = !sum.equals(new Double(0)) && cant != 0? sum/cant:0;
+				promedio.put("index", id_recurso);
+				promedio.put("value", prom);
+				listReturn.add(promedio);
+    		}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+    	
+        return listReturn;
     }
     
 	

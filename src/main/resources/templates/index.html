@@ -1,187 +1,206 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-    <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"/>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}"/>
-	<meta charset="utf-8" />
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css"/>
-	<script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
-	<script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
-	<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.0/dist/tf.min.js"></script>
-    <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css"
+	th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/main.css}" />
+<meta charset="utf-8" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet"
+	href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" />
+<script
+	src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+<script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js"
+	type="text/javascript"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.0/dist/tf.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-vis@1.0.2/dist/tfjs-vis.umd.min.js"></script>
+<!--     <script src="js/redneuronal.js"></script> -->
+<link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css"
+	rel="stylesheet" type="text/css" />
 <!-- 	<script src="/js/datatable.js"></script> -->
-    <title>Registro de Clase</title>
-    <style>
+<title>Registro de Clase</title>
+<style>
 .slidecontainer {
-  width: 100%;
+	width: 100%;
 }
 
 .slider {
-  -webkit-appearance: none;
-  width: 100%;
-  height: 25px;
-  background: #d3d3d3;
-  outline: none;
-  opacity: 0.7;
-  -webkit-transition: .2s;
-  transition: opacity .2s;
+	-webkit-appearance: none;
+	width: 100%;
+	height: 25px;
+	background: #d3d3d3;
+	outline: none;
+	opacity: 0.7;
+	-webkit-transition: .2s;
+	transition: opacity .2s;
 }
 
 .slider:hover {
-  opacity: 1;
+	opacity: 1;
 }
 
 .slider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 25px;
-  height: 25px;
-  background: #4CAF50;
-  cursor: pointer;
+	-webkit-appearance: none;
+	appearance: none;
+	width: 25px;
+	height: 25px;
+	background: #4CAF50;
+	cursor: pointer;
 }
 
 .slider::-moz-range-thumb {
-  width: 25px;
-  height: 25px;
-  background: #4CAF50;
-  cursor: pointer;
+	width: 25px;
+	height: 25px;
+	background: #4CAF50;
+	cursor: pointer;
 }
 </style>
 </head>
 <body>
-	
-	
-	
+
+
+
 	<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-1">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <div class="text-center">  
-                        <h3><i class="glyphicon glyphicon-user" style="font-size:2em;"></i></h3>
-                        <h2 class="text-center">Registro de Clase</h2>
-                        <div class="panel-body">
-                            <div th:if="${param.success}">
-                                <div class="alert alert-info">
-                                    !Se registro la clase satisfactoriamente!
-                                </div>
-                            </div>
-
-                            <form id="frmClase" method="post">
-				
-
-                                <div class="form-group">
-	                                <h2>Bienvenido</h2>
-									<div sec:authentication="name" ></div>
+		<div class="row">
+			<div class="col-md-8 col-md-offset-1">
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<div class="text-center">
+							<h3>
+								<i class="glyphicon glyphicon-user" style="font-size: 2em;"></i>
+							</h3>
+							<h2 class="text-center">Registro de Clase</h2>
+							<div class="panel-body">
+								<div th:if="${param.success}">
+									<div class="alert alert-info">!Se registro la clase
+										satisfactoriamente!</div>
 								</div>
-								<div class="form-group">
-	                                <label class="form-control">Fecha de clase</label>
-	                                <input id="fechaConsulta" data-date-format="yyyy-mm-dd" class="form-control" width="276" placeholder="Confirmar fecha"  />
-                                </div>
-                                <div class="form-group">
-                                	<label class="form-control">Sección</label>
-                                	<select disabled="disabled"> 
-                                		<option id="1" >3 años A</option>
-                                	</select>
-                                </div>
-                                <div class="form-group">
-                                    <button type="button" onclick="consultar()" class="btn btn-success btn-block">Consultar</button>
-                                    <button type="button" onclick="intento()" class="btn btn-success btn-block">Intentar</button>
-                                </div>
-                            </form>
-							<table id="alumnosTable" class="display">
-      
-						       <!-- Header Table -->
-						       <thead>
-						            <tr>
-						                <th>Id</th>
-										<th>Documento</th>
-						                <th>Nombre</th>
-						                <th>Email</th>
-						                <th>Telefono</th>
-						                <th>¿Calificado?</th>
-						                <th>Calificar</th>
-						            </tr>
-						        </thead>
-						        <!-- Footer Table -->
-						        <tfoot>
-						            <tr>
-						                <th>Id</th>
-										<th>Documento</th>
-						                <th>Nombre</th>
-						                <th>Email</th>
-						                <th>Telefono</th>
-						                <th>¿Calificado?</th>
-						                <th>Calificar</th>
-						            </tr>
-						        </tfoot>
-						    </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-    
-    <!-- Modal -->
+
+								<form id="frmClase" method="post">
+
+
+									<div class="form-group">
+										<h2>Bienvenido</h2>
+										<div sec:authentication="name"></div>
+									</div>
+									<div class="form-group">
+										<label class="form-control">Fecha de clase</label> <input
+											id="fechaConsulta" data-date-format="yyyy-mm-dd"
+											class="form-control" width="276"
+											placeholder="Confirmar fecha" />
+									</div>
+									<div class="form-group">
+										<label class="form-control">Sección</label> <select
+											disabled="disabled">
+											<option id="1">3 años A</option>
+										</select>
+									</div>
+									<div class="form-group">
+										<button type="button" onclick="consultar()"
+											class="btn btn-success btn-block">Consultar</button>
+										<button type="button" onclick="intento()"
+											class="btn btn-success btn-block">Intentar</button>
+									</div>
+								</form>
+								<table id="alumnosTable" class="display">
+
+									<!-- Header Table -->
+									<thead>
+										<tr>
+											<th>Id</th>
+											<th>Documento</th>
+											<th>Nombre</th>
+											<th>Email</th>
+											<th>Telefono</th>
+											<th>¿Calificado?</th>
+											<th>Calificar</th>
+										</tr>
+									</thead>
+									<!-- Footer Table -->
+									<tfoot>
+										<tr>
+											<th>Id</th>
+											<th>Documento</th>
+											<th>Nombre</th>
+											<th>Email</th>
+											<th>Telefono</th>
+											<th>¿Calificado?</th>
+											<th>Calificar</th>
+										</tr>
+									</tfoot>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal -->
 	<div id="mdCalificacion" class="modal fade" role="dialog">
-	  <div class="modal-dialog">
-	
-	    <!-- Modal content-->
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <button type="button" class="close" data-dismiss="modal">&times;</button>
-	        <h4 class="modal-title">Calificacion</h4>
-	      </div>
-	      <div class="modal-body">
-	      <div class="form-group">
-	      	<input type="hidden" id="idAlumno" name="idAlumno" />
-             <label class="form-control">Documento</label>
-             <input id="docAlumno" name="docAlumno" readonly="readonly" />
-            </div>
-	        <div class="form-group">
-             <label class="form-control">Nombre del Alumno</label>
-             <input id="nombreAlumno" name="nombreAlumno" readonly="readonly" />
-            </div>
-            <div class="form-group">
-             <label class="form-control">Actividad</label>
-             <select id="selActividad" name="selActividad">
-             	   <option value="" >---Seleccione---</option> 
-                   <option value="1" >Actidad 1</option>
-                   <option value="2" >Actidad 2</option>
-                   <option value="3" >Actidad 3</option>
-			</select>
-            </div>
-            <div class="form-group">
-             <label class="form-control">Recursos Didácticos</label>
-<!--              	<select id="selRecurso" name="selRecurso"> -->
-<!--              	</select> -->
-				<div id="dvRecurso"></div>
-            </div>
-<!--             <div class="form-group"> -->
-<!--              <label class="form-control">¿Lo utilizó?</label> -->
-<!--              	<input type="radio" name="utilizo" value="0"> SI</input> -->
-<!-- 				<input type="radio" name="utilizo" value="1"> NO</input> -->
-<!--             </div> -->
-            
-	      </div>
-	      <div class="modal-footer">
-	      	<button type="button" onclick="grabarClase()" class="btn btn-default" data-dismiss="modal">Guardar</button>
-	        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-	      </div>
-	    </div>
-	
-	  </div>
-	 </div>
-    <script type="text/javascript">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Calificacion</h4>
+				</div>
+				<div class="modal-body">
+					<div class="form-group">
+						<input type="hidden" id="idAlumno" name="idAlumno" /> <label
+							class="form-control">Documento</label> <input id="docAlumno"
+							name="docAlumno" readonly="readonly" />
+					</div>
+					<div class="form-group">
+						<label class="form-control">Nombre del Alumno</label> <input
+							id="nombreAlumno" name="nombreAlumno" readonly="readonly" />
+					</div>
+					<div class="form-group">
+						<label class="form-control">Actividad</label> <select
+							id="selActividad" name="selActividad">
+							<option value="">---Seleccione---</option>
+							<option value="1">Actidad 1</option>
+							<option value="2">Actidad 2</option>
+							<option value="3">Actidad 3</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label class="form-control">Recursos Didácticos</label>
+						<!--              	<select id="selRecurso" name="selRecurso"> -->
+						<!--              	</select> -->
+						<div id="dvRecurso"></div>
+					</div>
+					<!--             <div class="form-group"> -->
+					<!--              <label class="form-control">¿Lo utilizó?</label> -->
+					<!--              	<input type="radio" name="utilizo" value="0"> SI</input> -->
+					<!-- 				<input type="radio" name="utilizo" value="1"> NO</input> -->
+					<!--             </div> -->
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" onclick="grabarClase()"
+						class="btn btn-default" data-dismiss="modal">Guardar</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	<script type="text/javascript">
     var table;
     $(document).ready( function () {
 //    	 $('#fechaConsulta').datepicker();
@@ -285,6 +304,11 @@
     		 
     	});
     
+    function intento(){
+    	displayData(recursos);
+      	tfvis.show.modelSummary({name: 'Modelo de Clasificacion'}, model);
+
+    }
     function consultar(){
 //     	$.ajax({
 //     		url: 'http://localhost:8080/alumno/listalumnos/'+$('#fechaConsulta').val(),
@@ -375,89 +399,337 @@
 
     }
     
+    ////inicio JJB
     
- // **************************************
- // *  Tensorflow - Estilos aprendizaje  *
- // **************************************
+    getData = getDataFunction;
+    createModel = createModelFunction;
+    prepareData = prepareDataFunction
+    trainModel = trainModelFunction;
+    displayData = displayDataFunction;
+    evaluateModel = evaluateModelFunction;
 
- // console.log('Redes neuronales');
- // tf.tensor([2,4,1,7,5,2], [2,3]).print();
+    async function run() {
+      
+      // const data = await getData();
+      console.log('RUN data:', recursos);
+      displayData(recursos);
+      
+    	const model = createModel();  
+    	tfvis.show.modelSummary({name: 'Modelo de Clasificacion'}, model);
 
- // Creamos el modelo
- const model = tf.sequential();
- // Capa oculta
- const hidden = tf.layers.dense({
-     units: 4,
-     inputShape: [6],
-     activation: "sigmoid"
- });
- // Agregamos la capa oculta al modelo
- model.add(hidden);
- // Capa de salida
- const output = tf.layers.dense({
-     units: 3,
-     activation: "sigmoid"
- });
- // Agregamos la capa de salida al modelo
- model.add(output);
+    	const tensorData = prepareData(data);
+    	const {inputs, outputs} = tensorData;
+    		
+    	await trainModel(model, inputs, outputs, 100);
+    	console.log('Done Training');
+      
+      await evaluateModel(model, inputs, outputs);
+    }
 
- // Optimizador 
- // mientras mayor el nro mayor el costo para el equipo
- const sgdOptions = tf.train.sgd(0.1); 
- // Compilamos el modelo
- // model.compiler({
-//      optimizer: sgdOptions,
-//      loss: tf.losses.meanSquaredError /*Asignamos la forma de reducir la perdida*/
- // });
- // meanSquaredError: evita que las perdidas sean negativas
- // elevando todas las perdidas al cuadrado asi volverlas +
+    function loadJSON(path, callback) {   
+      var xobj = new XMLHttpRequest();
+          xobj.overrideMimeType("application/json");
+      xobj.open('GET', path, true);
+      xobj.onreadystatechange = function () {
+            if (xobj.readyState == 4) {
+            	if(xobj.status == "200"){
+            		callback(xobj.responseText);
+            	}
+            }
+      };
+      xobj.send(null);  
+    }
+    /**
+      * @desc retrieves data from defined location
+      * @return wine data as json
+    */
+    async function getDataFunction() {
+      
+      loadJSON("recursos.json", (response) => {
+        const recursos = JSON.parse(response)
+        // const data = await recursos.json();
+        console.log('response', data);
+        return data;
+      });
+      // const wineDataReq = await fetch('https://raw.githubusercontent.com/NMZivkovic/file_hosting/master/wine_quality.json');  
+      // const wineDataReq = JSON.parse(recursos);
+      // console.log('getData', wineDataReq);
+      // const wineData = await wineDataReq.json();  
+      // return wineData;
+    }
 
- // Datos:
- const xArray = [
-     [0,0,0,0,1,1],  
-     [0,0,0,1,1,0],
-     [1,1,0,0,0,0],
-     [0,1,1,0,0,0],
-     [0,0,1,1,0,0],
-     [0,0,1,1,1,0],
-   ];
- const yArray = [
-     [0,0,1], /**visual */
-     [0,0,1], /**visual */
-     [1,0,0], /**logico */
-     [1,0,0], /**logico */
-     [0,1,0], /**corporal */
-     [0,1,1], /**corporal */
- ];
- // Create a dataset from the JavaScript array
- const xDataset = tf.data.array(xArray);
- const yDataset = tf.data.array(yArray);
 
- const xyDataset = tf.data.zip({xs: xDataset, ys: yDataset})
-                 .batch(4)
-                 .shuffle(4);
+    /**
+      * @desc plots one 
+      * @param array values - array of values
+      * @param string name - name of the plot
+      * @param string xoutput - x name 
+      * @param string youtput - y name
+    */
+    function singlePlot(values, name, xoutput, youtput)
+    {
+      tfvis.render.scatterplot(
+        {name: name},
+        {values}, 
+        {
+          xoutput: xoutput,
+          youtput: youtput,
+          height: 300,
+          xLabel: "Recurso Utilizado",
+          yLabel: "Estilo de Aprendizaje"
+        }
+      );
+    }
 
- async function intento() {
-     model.compile({optimizer: sgdOptions, loss: 'meanSquaredError'});    
-     const history = await model.fitDataset(xyDataset, {
-                         epochs: 1000,
-                         callbacks: {onEpochEnd: (epoch, logs) => console.log(logs.loss)}
-                     });
-     // Se ejecuta la modelo de la red con 100 iteraciones
-     // bajo la tecnica de descenso de gradiente buscando minizar el error a cero
-     console.log('history', history.history.loss[0]);
+    function histograma(values, name, xoutput, youtput) {
+      // tfvis.render.barchart(
+      //   {name: name}, 
+      //   {values},
+      //   {
+      //    width: 400,
+      //    yLabel: 'My value',
+      //   }
+      // );
+      const data = [
+        { index: 0, value: 50 },
+        { index: 1, value: 100 },
+        { index: 2, value: 150 },
+       ];
+      
+      // Render to visor
+      const surface = { name: 'Recursos Utilizados', tab: 'Visor' };
+      tfvis.render.barchart(surface, values);
+    }
 
-     // const xs = tf.tensor([0,0,0,0,1,1]);
-     // let pred = model.predict(tf.tensor1d([0, 0, 0, 0, 1, 0])).print();
-     // var readable_output = pred.dataSync();
-     // console.log(readable_output);
+    /**
+      * @desc plots one 
+      * @param json data - complete json that contains wine quality data 
+    */
+    function displayDataFunction(data){
 
-     // const result = await model.evaluate([0, 0, 0, 0, 1, 0], outputs, {batchSize: 64});
-     // console.log('Accuracy is:')
-     // result[1].print()
- }
+      // let datos = data.map((index, d) => {
+      //   if (index === 0) {
+      //     return [
+      //       {index: 0, value: d.fixed_acidity},
+      //       {index: 1, value: d.volatile_acidity},
+      //       {index: 2, value: d.citric_acid},
+      //       {index: 3, value: d.residual_sugar},
+      //       {index: 4, value: d.chlorides},
+      //       {index: 5, value: d.free_sulfur_dioxide},
+      //       {index: 6, value: d.total_sulfur_dioxide}
+      //     ];
+      //   }
+      // } 
+      // );
 
- // intento();
+      // const data = [
+      //   {index: 'foo', value: 1},{index: 'bar', value: 7}, {index: 3, value: 3},
+      //   {index: 5, value: 6}];
+      // tfvis.render.barchart(document.getElementById('plot5'), data, {
+      //   yLabel: 'My value',
+      //   width: 400
+      // });
+      
+      // histograma(1, 1, 1, 1);
+      const r = [];
+      console.log('Display datos', data);
+      // data.forEach((i, e) => {
+      //   r.push({
+      //     index: i,
+      //     value: e[0].recurso1
+      //   });
+      //   console.log(e[0].resurso1);
+      // });
+      // const d = [];
+      // d = data[0];
+      // const arregloData = [];
+      // data.array.forEach(element => {
+        // d.foreach( (index, element) => {
+        //   console.log(element);
+        // });
+        
+      // });
+      // arregloData.push(data[0])
+      // histograma(r, 1, 1, 1);
+
+      let displayData = data.map(d => ({
+        x: d.recurso1,
+        y: d.estilo
+      }));
+
+      singlePlot(displayData, 'Recurso 1 v Estilo', 'Recursos', 'Estilo')
+
+      displayData = data.map(d => ({
+        x: d.recurso2,
+        y: d.quality
+      }));
+
+      singlePlot(displayData, 'Recurso 2 v Estilo', 'Recursos', 'Estilo')
+
+      displayData = data.map(d => ({
+        x: d.recurso3,
+        y: d.estilo
+      }));
+
+      singlePlot(displayData, 'Recurso 3 v Estilo', 'Recursos', 'Estilo')
+    }
+
+    /**
+      * @desc creates tensorflow graph
+      * @return model
+    */
+    function createModelFunction() {
+      const model = tf.sequential(); 
+      model.add(tf.layers.dense({inputShape: [6], units: 50, useBias: true, activation: 'sigmoid'}));
+      model.add(tf.layers.dense({units: 30, useBias: true, activation: 'sigmoid'}));
+      model.add(tf.layers.dense({units: 20, useBias: true, activation: 'sigmoid'}));
+
+      return model;
+    }
+
+    /**
+      * @desc creates array of input data for every sample
+      * @param json data - complete json that contains wine quality data 
+      * @return array of input data
+    */
+    function extractInputs(data)
+    {
+      let inputs = []
+      inputs = data.map(d => [d.fixed_acidity, d.volatile_acidity, d.citric_acid, d.residual_sugar, d.chlorides, d.free_sulfur_dioxide, d.total_sulfur_dioxide, d.density, d.pH, d.sulphates, d.alcohol])
+    	return inputs;
+    }
+
+    /**
+      * @desc converts data from json format to tensors
+      * @param json data - complete json that contains wine quality data 
+      * @return tuple of converted data that can be used for training model
+    */
+    function prepareDataFunction(data) {
+      
+      return tf.tidy(() => {
+        tf.util.shuffle(data);
+        
+        const inputs = extractInputs(data);
+        const outputs = data.map(d => d.quality);
+
+        const inputTensor = tf.tensor2d(inputs, [inputs.length, inputs[0].length]);
+        const outputTensor = tf.oneHot(tf.tensor1d(outputs, 'int32'), 10);
+
+        const inputMax = inputTensor.max();
+        const inputMin = inputTensor.min();  
+        const outputMax = outputTensor.max();
+        const outputMin = outputTensor.min();
+
+        const normalizedInputs = inputTensor.sub(inputMin).div(inputMax.sub(inputMin));
+        const normalizedoutputs = outputTensor.sub(outputMin).div(outputMax.sub(outputMin));
+
+        return {
+          inputs: normalizedInputs,
+          outputs: normalizedoutputs,
+          inputMax,
+          inputMin,
+          outputMax,
+          outputMin,
+        }
+      });  
+    }
+
+    /**
+      * @desc trains model
+      * @return trained model
+    */
+    async function trainModelFunction(model, inputs, outputs, epochs) {
+      model.compile({
+        optimizer: tf.train.adam(),
+        loss: 'categoricalCrossentropy',
+        metrics: ['accuracy'],
+      });
+      
+      const batchSize = 64;
+      
+      return await model.fit(inputs, outputs, {
+        batchSize,
+        epochs,
+        shuffle: true,
+        callbacks: tfvis.show.fitCallbacks(
+          { name: 'Training Performance' },
+          ['loss', 'accuracy'], 
+          { height: 200, callbacks: ['onEpochEnd'] }
+        )
+      });
+    }
+
+    /**
+      * @desc evaluates the model
+    */
+    async function evaluateModelFunction(model, inputs, outputs)
+    {
+      const result = await model.evaluate(inputs, outputs, {batchSize: 64});
+      console.log('Accuracy is:')
+      result[1].print();
+    }
+
+    document.addEventListener('DOMContentLoaded', run);
+
+    const recursos = [];
+    recursos.push({
+    		"recurso1": 0.25,
+    		"recurso2": 0.6,
+    		"recurso3": 0.9,
+    		"recurso4": 0.85,
+    		"recurso5": 0.44,
+        "recurso6": 0.15,
+        "estilo": 1
+    	}, {
+    		"recurso1": 0.25,
+    		"recurso2": 0.3,
+    		"recurso3": 0.5,
+    		"recurso4": 0.55,
+    		"recurso5": 0.24,
+        "recurso6": 0.55,
+        "estilo": 1
+    	}, {
+    		"recurso1": 0.95,
+    		"recurso2": 0.3,
+    		"recurso3": 0.6,
+    		"recurso4": 0.85,
+    		"recurso5": 0.54,
+        "recurso6": 0.65,
+        "estilo": 2
+    	}, {
+    		"recurso1": 0.15,
+    		"recurso2": 0.2,
+    		"recurso3": 0.7,
+    		"recurso4": 0.55,
+    		"recurso5": 0.25,
+        "recurso6": 0.85,
+        "estilo": 2
+    	}, {
+    		"recurso1": 0.55,
+    		"recurso2": 0.15,
+    		"recurso3": 0.9,
+    		"recurso4": 0.4,
+    		"recurso5": 0.5,
+        "recurso6": 0.7,
+        "estilo": 3
+    	}, {
+    		"recurso1": 0.25,
+    		"recurso2": 0.4,
+    		"recurso3": 0.9,
+    		"recurso4": 0.35,
+    		"recurso5": 0.65,
+        "recurso6": 0.95,
+        "estilo": 3
+    	}, {
+    		"recurso1": 0.2,
+    		"recurso2": 0.8,
+    		"recurso3": 0.25,
+    		"recurso4": 0.85,
+    		"recurso5": 0.8,
+        "recurso6": 0.35,
+        "estilo": 3
+    	});
+
     </script>
 </body>
 </html>
