@@ -25,5 +25,11 @@ public class ClaseAlumnoActividadesServiceImpl implements ClaseAlumnoActividades
 		// TODO Auto-generated method stub
 		return claseAlumnoActividadesRepository.findAll();
 	}
+	
+	@Override
+	public List<ClaseAlumnoActividades> findByIdClasealumno(Long idClasealumno) {
+		// TODO Auto-generated method stub
+		return claseAlumnoActividadesRepository.findByIdClasealumno(idClasealumno);
+	}
 
 }

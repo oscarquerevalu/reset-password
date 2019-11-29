@@ -110,6 +110,68 @@ public class AlumnoController {
 		return listaAlumnos;
     }
     
+    @GetMapping(value = "/getalumno/{fecha}/{clase}/{alumno}", produces=MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Ver los alumnos por fecha de clase")
+    public Map<String, Object> alumnoxFecna( @ApiParam(value = "Fecha de clase", required = true) @PathVariable String fecha,
+    										 @ApiParam(value = "Codigo de clase", required = true) @PathVariable Long clase,
+    										 @ApiParam(value = "Codigo de alumno", required = true) @PathVariable Long alumno) {
+
+    	List<Alumno> listaAlumnos = new ArrayList<Alumno>();
+    	List<ClaseAlumno> listaClaseAlumno = new ArrayList<ClaseAlumno>();
+    	List<ClaseAlumnoActividades> lstClaseAlumnoActividades = new ArrayList<ClaseAlumnoActividades>();
+    	Map<String, Object> map = new HashMap<String, Object>();
+    	
+    	try {
+    		
+    		listaClaseAlumno = new ArrayList<ClaseAlumno>();
+			listaClaseAlumno = claseAlumnoService.findByFechaIdAlumno(fecha,alumno);
+			
+			Double rec1 = new Double("0");
+			Double rec2 = new Double("0");
+			Double rec3 = new Double("0");
+			Double rec4 = new Double("0");
+			Long rc1 = 0L;
+			Long rc2 = 0L;
+			Long rc3 = 0L;
+			Long rc4 = 0L;
+			
+			for (ClaseAlumno claseAlumno : listaClaseAlumno) {
+				lstClaseAlumnoActividades = claseAlumnoActividadesService.findByIdClasealumno(claseAlumno.getId());
+				
+				for (ClaseAlumnoActividades claseAlumnoActividades : lstClaseAlumnoActividades) {
+					if(rec1.equals(new Double("0"))) {
+						rec1 = claseAlumnoActividades.getValor() != null && !claseAlumnoActividades.getValor().equals(new Double("0"))? claseAlumnoActividades.getValor():new Double("0");
+						rc1 = claseAlumnoActividades.getId_recurso();
+					}else if(rec2.equals(new Double("0"))) {
+						rec2 = claseAlumnoActividades.getValor() != null && !claseAlumnoActividades.getValor().equals(new Double("0"))? claseAlumnoActividades.getValor():new Double("0");
+						rc2 = claseAlumnoActividades.getId_recurso();
+					}else if(rec3.equals(new Double("0"))) {
+						rec3 = claseAlumnoActividades.getValor() != null && !claseAlumnoActividades.getValor().equals(new Double("0"))? claseAlumnoActividades.getValor():new Double("0");
+						rc3 = claseAlumnoActividades.getId_recurso();
+					}else if(rec4.equals(new Double("0"))) {
+						rec4 = claseAlumnoActividades.getValor() != null && !claseAlumnoActividades.getValor().equals(new Double("0"))? claseAlumnoActividades.getValor():new Double("0");
+						rc4 = claseAlumnoActividades.getId_recurso();
+					}else {
+						break;
+					}
+				}
+			}
+			
+			map.put("rec1", rc1);
+			map.put("val1", rec1);
+			map.put("rec2", rc2);
+			map.put("val2", rec2);
+			map.put("rec3", rc3);
+			map.put("val3", rec3);
+			map.put("rec4", rc4);
+			map.put("val4", rec4);
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return map;
+    }
+    
     @ApiOperation(value = "Graba datos de clase")
     @PostMapping("/grabarClase")
     public String create(@RequestBody Map<String, String> body){
