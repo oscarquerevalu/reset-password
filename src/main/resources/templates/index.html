@@ -174,8 +174,6 @@
 									<div class="form-group">
 										<button type="button" onclick="consultar()"
 											class="btn btn-success btn-block">Consultar</button>
-										<button type="button" onclick="intento()"
-											class="btn btn-success btn-block">Intentar</button>
 									</div>
 								</form>
 								<table id="alumnosTable" class="display">
@@ -266,6 +264,38 @@
 
 		</div>
 	</div>
+	
+	<div id="mdPrediccion" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Predicción</h4>
+				</div>
+				<div class="modal-body">
+					<div class="form-group">
+						<input type="hidden" id="idAlumnoPred" name="idAlumnoPred" /> <label
+							class="form-control">Documento</label> <input id="docAlumnoPred"
+							name="docAlumnoPred" readonly="readonly" />
+					</div>
+					<div class="form-group">
+						<label class="form-control">Nombre del Alumno</label> <input
+							id="nombreAlumnoPred" name="nombreAlumnoPred" readonly="readonly" />
+					</div>
+					<div class="form-group">
+						<label class="form-control">Nombre del Alumno</label>
+					</div>
+					<div id="dvEstilo"></div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+				</div>
+			</div>
+
+		</div>
+	</div>
 	<script type="text/javascript">
     var table;
     $(document).ready( function () {
@@ -306,18 +336,33 @@
     		type:"GET",
     		success: function(respuesta) {
     			console.log(respuesta);
+    			$('#nombreAlumnoPred').val(nombre);
+    	    	$('#docAlumnoPred').val(doc);
+    	    	$('#idAlumnoPred').val(id);
+    	    	$('#dvEstilo').empty();
     			
     			var val1 = respuesta.val1;
     			var val2 = respuesta.val2;
-    			var val3 = respuesta.val1;
-    			var val4 = respuesta.val1;
+    			var val3 = respuesta.val3;
+    			var val4 = respuesta.val4;
     			testTensor = tf.tensor2d([val1,val2,val3,val4], [1, 4]);
-    			tfvis.show.modelSummary({name: 'Modelo de Predicción'}, model);
+//     			tfvis.show.modelSummary({name: 'Modelo de Predicción'}, model);
     			model.predict(testTensor).print();
     			const output = model.predict(testTensor);
     			const valores = output.dataSync();
+    			
+    			const porcEstilo1 = (valores[0]*100).toFixed(2);
+    			const porcEstilo2 = (valores[1]*100).toFixed(2);
     			console.log('salida 1:', valores[0]);
     			console.log('salida 2:', valores[1]);
+    			
+    			const estilo1 = $('<div><label>LÓGICA MATEMÁTICA:</label> <input type="range" min="0" max="100" value="'+porcEstilo1+'" class="slider" id="estilo1" disabled="disabled"></input><label id="rangeText1">Valor: %'+porcEstilo1+'</label></div>');
+    			estilo1.appendTo('#dvEstilo');
+    			
+    			const estilo2 = $('<div><label>ESPACIAL:</label> <input type="range" min="0" max="100" value="'+porcEstilo2+'" class="slider" id="estilo1" disabled="disabled"></input><label id="rangeText2">Valor: %'+porcEstilo2+'</label></div>');
+    			estilo2.appendTo('#dvEstilo');
+    			$('#mdPrediccion').modal('show');
+    			
     		},
     		error: function() {
     	        console.log("No se ha podido obtener la información");
@@ -801,6 +846,36 @@
     			"recurso4": 0.89,		
     	    "estilo": 1
     		}, {
+    			"recurso1": 0,
+    			"recurso2": 0,
+    			"recurso3": 0.75,
+    			"recurso4": 0.89,		
+    	    "estilo": 1
+    		}, {
+    			"recurso1": 0,
+    			"recurso2": 0,
+    			"recurso3": 0.75,
+    			"recurso4": 0.89,		
+    	    "estilo": 1
+    		}, {
+    			"recurso1": 0,
+    			"recurso2": 0,
+    			"recurso3": 0.75,
+    			"recurso4": 0.89,		
+    	    "estilo": 1
+    		}, {
+    			"recurso1": 0,
+    			"recurso2": 0,
+    			"recurso3": 0.75,
+    			"recurso4": 0.89,		
+    	    "estilo": 1
+    		}, {
+    			"recurso1": 0,
+    			"recurso2": 0,
+    			"recurso3": 0.75,
+    			"recurso4": 0.89,		
+    	    "estilo": 1
+    		}, {
     			"recurso1": 0.85,
     			"recurso2": 0.95,
     			"recurso3": 0,
@@ -809,6 +884,42 @@
     		}, {
     			"recurso1": 0.95,
     			"recurso2": 0.9,
+    			"recurso3": 0,
+    			"recurso4": 0,
+    	    "estilo": 2
+    		}, {
+    			"recurso1": 0.91,
+    			"recurso2": 0.89,
+    			"recurso3": 0,
+    			"recurso4": 0,
+    	    "estilo": 2
+    		}, {
+    			"recurso1": 0.91,
+    			"recurso2": 0.89,
+    			"recurso3": 0,
+    			"recurso4": 0,
+    	    "estilo": 2
+    		}, {
+    			"recurso1": 0.91,
+    			"recurso2": 0.89,
+    			"recurso3": 0,
+    			"recurso4": 0,
+    	    "estilo": 2
+    		}, {
+    			"recurso1": 0.91,
+    			"recurso2": 0.89,
+    			"recurso3": 0,
+    			"recurso4": 0,
+    	    "estilo": 2
+    		}, {
+    			"recurso1": 0.91,
+    			"recurso2": 0.89,
+    			"recurso3": 0,
+    			"recurso4": 0,
+    	    "estilo": 2
+    		}, {
+    			"recurso1": 0.91,
+    			"recurso2": 0.89,
     			"recurso3": 0,
     			"recurso4": 0,
     	    "estilo": 2
