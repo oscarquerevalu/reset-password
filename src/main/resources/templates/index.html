@@ -571,31 +571,31 @@
     var testTensor;
     
     async function run() {
-    	  
-    	  // const data = await getDataFunction();
-    	  
-    	  console.log('RUN DATA:', recursos);
-    	  $(".loader").css("visibility", "visible");
-    	  //displayDataFunction(recursos);
-    	  
-    		model = createModelFunction();  
-//     		tfvis.show.modelSummary({name: 'Modelo de Clasificacion'}, model);
+    	  $.ajax({
+        		url: 'http://localhost:8080/alumno/getDataClaseAlumnos',
+        		type:"GET",
+        		success: function(respuesta) {
+        			console.log('RUN DATA:', respuesta);
+        	    	  $(".loader").css("visibility", "visible");
+        	    	  
+        	    		model = createModelFunction();  
 
-    		tensorData = prepareDataFunction(recursos);
-    		const {inputs, outputs} = tensorData;
-    			
-    		await trainModelFunction(model, inputs, outputs, 500);
-    	  console.log('Done Training');
-    	  
-    	  const shape = [4, 1];
-    	  testTensor = tf.tensor2d([0.95,0.9,0,0], [1, 4]);
-//     	  model.predict(testTensor).print();
-    	  $(".loader").css("visibility", "hidden");
-    	  $(".loader2").css("visibility", "hidden");
-    	  
-    	  document.getElementById("myDiv").style.display = "block";
-
-    	  //await evaluateModelFunction(model, inputs, outputs);
+        	    		tensorData = prepareDataFunction(respuesta);
+        	    		const {inputs, outputs} = tensorData;
+        	    			
+        	    		trainModelFunction(model, inputs, outputs, 500);
+        	    	  console.log('Done Training');
+        	    	  $(".loader").css("visibility", "hidden");
+        	    	  $(".loader2").css("visibility", "hidden");
+        	    	  
+        	    	  document.getElementById("myDiv").style.display = "block";
+        			
+        		},
+        		error: function() {
+        	        console.log("No se ha podido obtener la información");
+        	        tfvis.show.modelSummary({name: 'Modelo de Predicción'}, model);
+        	    }
+        	});
     	}
     	/**@desc recuperar datos de un json de un archivo local 
     	 * @return null
@@ -724,7 +724,7 @@
     	function createModelFunction() {
     	  const model = tf.sequential(); 
     	  model.add(tf.layers.dense({inputShape: [4], units: 6, activation: 'sigmoid'}));
-    	  model.add(tf.layers.dense({units: 2, activation: 'sigmoid'}));
+    	  model.add(tf.layers.dense({units: 8, activation: 'sigmoid'}));
     	  // model.add(tf.layers.dense({units: 20, useBias: true, activation: 'sigmoid'}));
 
     	  return model;
@@ -756,7 +756,7 @@
     	    const outputs = data.map(d => d.estilo);
 
     	    const inputTensor = tf.tensor2d(inputs, [inputs.length, inputs[0].length]);
-    	    const outputTensor = tf.oneHot(tf.tensor1d(outputs, 'int32'), 2);
+    	    const outputTensor = tf.oneHot(tf.tensor1d(outputs, 'int32'), 8);
 
     	    const inputMax = inputTensor.max();
     	    const inputMin = inputTensor.min();  

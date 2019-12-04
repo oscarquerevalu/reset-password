@@ -172,6 +172,105 @@ public class AlumnoController {
 		return map;
     }
     
+    @GetMapping(value = "/getDataClaseAlumnos", produces=MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Datos de Clase de alumnos")
+    public List<Map<String, Object>> getClaseAlumno() {
+
+    	List<ClaseAlumno> listaClaseAlumno = new ArrayList<ClaseAlumno>();
+    	List<ClaseAlumnoActividades> lstClaseAlumnoActividades = new ArrayList<ClaseAlumnoActividades>();
+    	Map<String, Object> map = new HashMap<String, Object>();
+    	List<Map<String, Object>> lstDataClase = new ArrayList<Map<String,Object>>();
+    	
+    	try {
+    		
+    		listaClaseAlumno = new ArrayList<ClaseAlumno>();
+			listaClaseAlumno = claseAlumnoService.findByAll();
+			
+			Double rec1 = new Double("0");
+			Double rec2 = new Double("0");
+			Double rec3 = new Double("0");
+			Double rec4 = new Double("0");
+			Double rec5 = new Double("0");
+			Double rec6 = new Double("0");
+			Double rec7 = new Double("0");
+			Double rec8 = new Double("0");
+			Double rec9 = new Double("0");
+			Double rec10 = new Double("0");
+			Double rec11 = new Double("0");
+			Double rec12 = new Double("0");
+			Long estilo = new Long(0);
+			
+			
+			for (ClaseAlumno claseAlumno : listaClaseAlumno) {
+				map = new HashMap<String, Object>();
+				lstClaseAlumnoActividades = claseAlumnoActividadesService.findByIdClasealumno(claseAlumno.getId());
+				estilo = claseAlumno.getId_estilo() !=null?claseAlumno.getId_estilo():new Long(0);
+				for (ClaseAlumnoActividades claseAlumnoActividades : lstClaseAlumnoActividades) {
+					if(rec1.equals(new Double("0")) && (new Long(1)).equals(claseAlumnoActividades.getId_recurso())) {
+						rec1 = claseAlumnoActividades.getValor() != null && !claseAlumnoActividades.getValor().equals(new Double("0"))? claseAlumnoActividades.getValor():new Double("0");
+					}else if(rec2.equals(new Double("0")) && (new Long(2)).equals(claseAlumnoActividades.getId_recurso())) {
+						rec2 = claseAlumnoActividades.getValor() != null && !claseAlumnoActividades.getValor().equals(new Double("0"))? claseAlumnoActividades.getValor():new Double("0");
+					}else if(rec3.equals(new Double("0")) && (new Long(3)).equals(claseAlumnoActividades.getId_recurso())) {
+						rec3 = claseAlumnoActividades.getValor() != null && !claseAlumnoActividades.getValor().equals(new Double("0"))? claseAlumnoActividades.getValor():new Double("0");
+					}else if(rec4.equals(new Double("0")) && (new Long(4)).equals(claseAlumnoActividades.getId_recurso())) {
+						rec4 = claseAlumnoActividades.getValor() != null && !claseAlumnoActividades.getValor().equals(new Double("0"))? claseAlumnoActividades.getValor():new Double("0");
+					}else if(rec5.equals(new Double("0")) && (new Long(5)).equals(claseAlumnoActividades.getId_recurso())) {
+						rec5 = claseAlumnoActividades.getValor() != null && !claseAlumnoActividades.getValor().equals(new Double("0"))? claseAlumnoActividades.getValor():new Double("0");
+					}else if(rec2.equals(new Double("0")) && (new Long(6)).equals(claseAlumnoActividades.getId_recurso())) {
+						rec6 = claseAlumnoActividades.getValor() != null && !claseAlumnoActividades.getValor().equals(new Double("0"))? claseAlumnoActividades.getValor():new Double("0");
+					}else if(rec3.equals(new Double("0"))  && (new Long(7)).equals(claseAlumnoActividades.getId_recurso())) {
+						rec7 = claseAlumnoActividades.getValor() != null && !claseAlumnoActividades.getValor().equals(new Double("0"))? claseAlumnoActividades.getValor():new Double("0");
+					}else if(rec4.equals(new Double("0")) && (new Long(8)).equals(claseAlumnoActividades.getId_recurso())) {
+						rec8 = claseAlumnoActividades.getValor() != null && !claseAlumnoActividades.getValor().equals(new Double("0"))? claseAlumnoActividades.getValor():new Double("0");
+					}else if(rec1.equals(new Double("0")) && (new Long(9)).equals(claseAlumnoActividades.getId_recurso())) {
+						rec9 = claseAlumnoActividades.getValor() != null && !claseAlumnoActividades.getValor().equals(new Double("0"))? claseAlumnoActividades.getValor():new Double("0");
+					}else if(rec2.equals(new Double("0")) && (new Long(10)).equals(claseAlumnoActividades.getId_recurso())) {
+						rec10 = claseAlumnoActividades.getValor() != null && !claseAlumnoActividades.getValor().equals(new Double("0"))? claseAlumnoActividades.getValor():new Double("0");
+					}else if(rec3.equals(new Double("0")) && (new Long(11)).equals(claseAlumnoActividades.getId_recurso())) {
+						rec11 = claseAlumnoActividades.getValor() != null && !claseAlumnoActividades.getValor().equals(new Double("0"))? claseAlumnoActividades.getValor():new Double("0");
+					}else if(rec4.equals(new Double("0")) && (new Long(12)).equals(claseAlumnoActividades.getId_recurso())) {
+						rec12 = claseAlumnoActividades.getValor() != null && !claseAlumnoActividades.getValor().equals(new Double("0"))? claseAlumnoActividades.getValor():new Double("0");
+					}
+				}
+				
+				map.put("recurso1", rec1);
+				map.put("recurso2", rec2);
+				map.put("recurso3", rec3);
+				map.put("recurso4", rec4);
+				map.put("recurso5", rec5);
+				map.put("recurso6", rec6);
+				map.put("recurso7", rec7);
+				map.put("recurso8", rec8);
+				map.put("recurso9", rec9);
+				map.put("recurso10", rec10);
+				map.put("recurso11", rec11);
+				map.put("recurso12", rec12);
+				map.put("estilo", estilo);
+				lstDataClase.add(map);
+				
+				rec1 = new Double("0");
+				rec2 = new Double("0");
+				rec3 = new Double("0");
+				rec4 = new Double("0");
+				rec5 = new Double("0");
+				rec6 = new Double("0");
+				rec7 = new Double("0");
+				rec8 = new Double("0");
+				rec9 = new Double("0");
+				rec10 = new Double("0");
+				rec11 = new Double("0");
+				rec12 = new Double("0");
+				estilo = new Long(0);
+			}
+			
+			
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return lstDataClase;
+    }
+    
     @ApiOperation(value = "Graba datos de clase")
     @PostMapping("/grabarClase")
     public String create(@RequestBody Map<String, String> body){

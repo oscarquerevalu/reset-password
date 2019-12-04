@@ -39,6 +39,9 @@ public class ClaseAlumno implements Serializable {
 	@Column
 	private String fecha;
 	
+	@Column
+	private Long id_estilo;
+	
 	public ClaseAlumno() {
 	}
 
@@ -72,6 +75,14 @@ public class ClaseAlumno implements Serializable {
 
 	public void setFecha(String fecha) {
 		this.fecha = fecha;
+	}
+
+	public Long getId_estilo() {
+		return id_estilo;
+	}
+
+	public void setId_estilo(Long id_estilo) {
+		this.id_estilo = id_estilo;
 	}
 	
 }
