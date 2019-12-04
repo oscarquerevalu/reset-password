@@ -216,19 +216,19 @@ public class AlumnoController {
 						rec4 = claseAlumnoActividades.getValor() != null && !claseAlumnoActividades.getValor().equals(new Double("0"))? claseAlumnoActividades.getValor():new Double("0");
 					}else if(rec5.equals(new Double("0")) && (new Long(5)).equals(claseAlumnoActividades.getId_recurso())) {
 						rec5 = claseAlumnoActividades.getValor() != null && !claseAlumnoActividades.getValor().equals(new Double("0"))? claseAlumnoActividades.getValor():new Double("0");
-					}else if(rec2.equals(new Double("0")) && (new Long(6)).equals(claseAlumnoActividades.getId_recurso())) {
+					}else if(rec6.equals(new Double("0")) && (new Long(6)).equals(claseAlumnoActividades.getId_recurso())) {
 						rec6 = claseAlumnoActividades.getValor() != null && !claseAlumnoActividades.getValor().equals(new Double("0"))? claseAlumnoActividades.getValor():new Double("0");
-					}else if(rec3.equals(new Double("0"))  && (new Long(7)).equals(claseAlumnoActividades.getId_recurso())) {
+					}else if(rec7.equals(new Double("0"))  && (new Long(7)).equals(claseAlumnoActividades.getId_recurso())) {
 						rec7 = claseAlumnoActividades.getValor() != null && !claseAlumnoActividades.getValor().equals(new Double("0"))? claseAlumnoActividades.getValor():new Double("0");
-					}else if(rec4.equals(new Double("0")) && (new Long(8)).equals(claseAlumnoActividades.getId_recurso())) {
+					}else if(rec8.equals(new Double("0")) && (new Long(8)).equals(claseAlumnoActividades.getId_recurso())) {
 						rec8 = claseAlumnoActividades.getValor() != null && !claseAlumnoActividades.getValor().equals(new Double("0"))? claseAlumnoActividades.getValor():new Double("0");
-					}else if(rec1.equals(new Double("0")) && (new Long(9)).equals(claseAlumnoActividades.getId_recurso())) {
+					}else if(rec9.equals(new Double("0")) && (new Long(9)).equals(claseAlumnoActividades.getId_recurso())) {
 						rec9 = claseAlumnoActividades.getValor() != null && !claseAlumnoActividades.getValor().equals(new Double("0"))? claseAlumnoActividades.getValor():new Double("0");
-					}else if(rec2.equals(new Double("0")) && (new Long(10)).equals(claseAlumnoActividades.getId_recurso())) {
+					}else if(rec10.equals(new Double("0")) && (new Long(10)).equals(claseAlumnoActividades.getId_recurso())) {
 						rec10 = claseAlumnoActividades.getValor() != null && !claseAlumnoActividades.getValor().equals(new Double("0"))? claseAlumnoActividades.getValor():new Double("0");
-					}else if(rec3.equals(new Double("0")) && (new Long(11)).equals(claseAlumnoActividades.getId_recurso())) {
+					}else if(rec11.equals(new Double("0")) && (new Long(11)).equals(claseAlumnoActividades.getId_recurso())) {
 						rec11 = claseAlumnoActividades.getValor() != null && !claseAlumnoActividades.getValor().equals(new Double("0"))? claseAlumnoActividades.getValor():new Double("0");
-					}else if(rec4.equals(new Double("0")) && (new Long(12)).equals(claseAlumnoActividades.getId_recurso())) {
+					}else if(rec12.equals(new Double("0")) && (new Long(12)).equals(claseAlumnoActividades.getId_recurso())) {
 						rec12 = claseAlumnoActividades.getValor() != null && !claseAlumnoActividades.getValor().equals(new Double("0"))? claseAlumnoActividades.getValor():new Double("0");
 					}
 				}
