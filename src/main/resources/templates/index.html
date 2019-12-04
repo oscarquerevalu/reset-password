@@ -154,11 +154,12 @@
 
 								<form id="frmClase" method="post">
 
-
+									<!-- 
 									<div class="form-group">
 										<h2>Bienvenido</h2>
 										<div sec:authentication="name"></div>
 									</div>
+									 -->
 									<div class="form-group">
 										<label class="form-control">Fecha de clase</label> <input
 											id="fechaConsulta" data-date-format="yyyy-mm-dd"
@@ -296,678 +297,610 @@
 
 		</div>
 	</div>
+	
 	<script type="text/javascript">
-    var table;
-    $(document).ready( function () {
-//    	 $('#fechaConsulta').datepicker();
-   	$("#fechaConsulta").datepicker({ dateFormat: 'yy-mm-dd' });
-//    	var table = $('#alumnosTable').DataTable( {
-//    	    paging: false
-//    	} );
-   });
-    
-    
-    function abrirCalificacion(id, nombre, doc){
-    	console.log(id);
-    	console.log(nombre);
-    	console.log(doc);
-    	$('#nombreAlumno').val(nombre);
-    	$('#docAlumno').val(doc);
-    	$('#idAlumno').val(id);
-    	
-    	$('#mdCalificacion').modal('show');
-    }
-    
-    function abrirPrediccion(id, nombre, doc){
-    	console.log(id);
-    	console.log(nombre);
-    	console.log(doc);
-    	
-    	var formattedDate = new Date($('#fechaConsulta').val());
-		var d = formattedDate.getDate();
-		var m =  formattedDate.getMonth();
-		m += 1;  // JavaScript months are 0-11
-		var y = formattedDate.getFullYear();
 		
-		var fecha = "" + d + m + y;
-    	
-    	$.ajax({
-    		url: 'http://localhost:8080/alumno/getalumno/'+fecha+'/1/'+id,
-    		type:"GET",
-    		success: function(respuesta) {
-    			console.log(respuesta);
-    			$('#nombreAlumnoPred').val(nombre);
-    	    	$('#docAlumnoPred').val(doc);
-    	    	$('#idAlumnoPred').val(id);
-    	    	$('#dvEstilo').empty();
-    			
-    			var val1 = respuesta.val1;
-    			var val2 = respuesta.val2;
-    			var val3 = respuesta.val3;
-    			var val4 = respuesta.val4;
-    			testTensor = tf.tensor2d([val1,val2,val3,val4], [1, 4]);
-//     			tfvis.show.modelSummary({name: 'Modelo de Predicción'}, model);
-    			model.predict(testTensor).print();
-    			const output = model.predict(testTensor);
-    			const valores = output.dataSync();
-    			
-    			const porcEstilo1 = (valores[0]*100).toFixed(2);
-    			const porcEstilo2 = (valores[1]*100).toFixed(2);
-    			console.log('salida 1:', valores[0]);
-    			console.log('salida 2:', valores[1]);
-    			
-    			const estilo1 = $('<div><label>LÓGICA MATEMÁTICA:</label> <input type="range" min="0" max="100" value="'+porcEstilo1+'" class="slider" id="estilo1" disabled="disabled"></input><label id="rangeText1">Valor: %'+porcEstilo1+'</label></div>');
-    			estilo1.appendTo('#dvEstilo');
-    			
-    			const estilo2 = $('<div><label>ESPACIAL:</label> <input type="range" min="0" max="100" value="'+porcEstilo2+'" class="slider" id="estilo1" disabled="disabled"></input><label id="rangeText2">Valor: %'+porcEstilo2+'</label></div>');
-    			estilo2.appendTo('#dvEstilo');
-    			$('#mdPrediccion').modal('show');
-    			
-    		},
-    		error: function() {
-    	        console.log("No se ha podido obtener la información");
-    	        tfvis.show.modelSummary({name: 'Modelo de Predicción'}, model);
-    	    }
-    	});
-    	
-    }
-    
-    $('#selActividad').on('change', function() {
-    		$('#dvRecurso').empty();
-// 			if($('#selActividad').val() == '1'){
-				var check1 = $('<div><input type="checkbox" id="checkRecurso" name="checkRecurso" value="1"> Recurso 1A</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang1"></input><label id="rangeText1">Valor: 0</label></div>');
-				var check2 = $('<div><input type="checkbox" id="checkRecurso" name="checkRecurso" value="2"> Recurso 1B</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang2"></input><label id="rangeText2">Valor: 0</label></div>');
-				var check3 = $('<div><input type="checkbox" id="checkRecurso" name="checkRecurso" value="3"> Recurso 1C</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang3"></input><label id="rangeText3">Valor: 0</label></div>');
-				var check4 = $('<div><input type="checkbox" id="checkRecurso" name="checkRecurso" value="4"> Recurso 1D</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang4"></input><label id="rangeText4">Valor: 0</label></div>');
-				var check5 = $('<div><input type="checkbox" id="checkRecurso" name="checkRecurso" value="5"> Recurso 2A</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang5"></input><label id="rangeText5">Valor: 0</label></div>');
-				var check6 = $('<div><input type="checkbox" id="checkRecurso" name="checkRecurso" value="6"> Recurso 2B</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang6"></input><label id="rangeText6">Valor: 0</label></div>');
-				var check7 = $('<div><input type="checkbox" id="checkRecurso" name="checkRecurso" value="7"> Recurso 2C</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang7"></input><label id="rangeText7">Valor: 0</label></div>');
-				var check8 = $('<div><input type="checkbox" id="checkRecurso" name="checkRecurso" value="8"> Recurso 2D</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang8"></input><label id="rangeText8">Valor: 0</label></div>');
-				var check9 = $('<div><input type="checkbox" id="checkRecurso" name="checkRecurso" value="9"> Recurso 3A</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang9"></input><label id="rangeText9">Valor: 0</label></div>');
-				var check10 = $('<div><input type="checkbox" id="checkRecurso" name="checkRecurso" value="10"> Recurso 3B</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang10"> </input><label id="rangeText10">Valor: 0</label></div>');
-				var check11 = $('<div><input type="checkbox" id="checkRecurso" name="checkRecurso" value="11"> Recurso 3C</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang11"> </input><label id="rangeText11">Valor: 0</label></div>');
-				var check12 = $('<div><input type="checkbox" id="checkRecurso" name="checkRecurso" value="12"> Recurso 3D</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang12"> </input><label id="rangeText12">Valor: 0</label></div>');
-				check1.appendTo('#dvRecurso');
-				check2.appendTo('#dvRecurso');
-				check3.appendTo('#dvRecurso');
-				check4.appendTo('#dvRecurso');
-				check5.appendTo('#dvRecurso');
-				check6.appendTo('#dvRecurso');
-				check7.appendTo('#dvRecurso');
-				check8.appendTo('#dvRecurso');
-				check9.appendTo('#dvRecurso');
-				check10.appendTo('#dvRecurso');
-				check11.appendTo('#dvRecurso');
-				check12.appendTo('#dvRecurso');
-				
-				$('#rang1').on('input change', function () {
-			        $('#rangeText1').text("Valor: "+$(this).val());
-			    });
-				$('#rang2').on('input change', function () {
-			        $('#rangeText2').text("Valor: "+$(this).val());
-			    });
-				$('#rang3').on('input change', function () {
-			        $('#rangeText3').text("Valor: "+$(this).val());
-			    });
-				$('#rang4').on('input change', function () {
-			        $('#rangeText4').text("Valor: "+$(this).val());
-			    });
-				$('#rang5').on('input change', function () {
-			        $('#rangeText5').text("Valor: "+$(this).val());
-			    });
-				$('#rang6').on('input change', function () {
-			        $('#rangeText6').text("Valor: "+$(this).val());
-			    });
-				$('#rang7').on('input change', function () {
-			        $('#rangeText7').text("Valor: "+$(this).val());
-			    });
-				$('#rang8').on('input change', function () {
-			        $('#rangeText8').text("Valor: "+$(this).val());
-			    });
-				$('#rang9').on('input change', function () {
-			        $('#rangeText9').text("Valor: "+$(this).val());
-			    });
-				$('#rang10').on('input change', function () {
-			        $('#rangeText10').text("Valor: "+$(this).val());
-			    });
-				$('#rang11').on('input change', function () {
-			        $('#rangeText11').text("Valor: "+$(this).val());
-			    });
-				$('#rang12').on('input change', function () {
-			        $('#rangeText12').text("Valor: "+$(this).val());
-			    });
-// 			}else if($('#selActividad').val() == '2'){
-// 				$('#selRecurso').append('<option value="5">Recurso 2A</option>');
-// 				$('#selRecurso').append('<option value="6">Recurso 2B</option>');
-// 				$('#selRecurso').append('<option value="7">Recurso 2C</option>');
-// 				$('#selRecurso').append('<option value="8">Recurso 2D</option>');
-// 				var check1 = $('<div><input type="checkbox" id="checkRecurso" name="checkRecurso" value="5"> Recurso 2A</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang5"></input><label id="rangeText5" value="Valor: 0" /></div>');
-// 				var check2 = $('<div><input type="checkbox" id="checkRecurso" name="checkRecurso" value="6"> Recurso 2B</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang6"></input><label id="rangeText6" value="Valor: 0" /></div>');
-// 				var check3 = $('<div><input type="checkbox" id="checkRecurso" name="checkRecurso" value="7"> Recurso 2C</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang7"></input><label id="rangeText7" value="Valor: 0" /></div>');
-// 				var check4 = $('<div><input type="checkbox" id="checkRecurso" name="checkRecurso" value="8"> Recurso 2D</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang8"></input><label id="rangeText8" value="Valor: 0" /></div>');
-// 				check1.appendTo('#dvRecurso');
-// 				check2.appendTo('#dvRecurso');
-// 				check3.appendTo('#dvRecurso');
-// 				check4.appendTo('#dvRecurso');
-// 				$('#rang5').on('input change', function () {
-// 			        $('#rangeText5').text("Valor: "+$(this).val());
-// 			    });
-// 				$('#rang6').on('input change', function () {
-// 			        $('#rangeText6').text("Valor: "+$(this).val());
-// 			    });
-// 				$('#rang7').on('input change', function () {
-// 			        $('#rangeText7').text("Valor: "+$(this).val());
-// 			    });
-// 				$('#rang8').on('input change', function () {
-// 			        $('#rangeText8').text("Valor: "+$(this).val());
-// 			    });
-// 			}else if($('#selActividad').val() == '3'){
-// // 				$('#selRecurso').append('<option value="9">Recurso 3A</option>');
-// // 				$('#selRecurso').append('<option value="10">Recurso 3B</option>');
-// // 				$('#selRecurso').append('<option value="11">Recurso 3C</option>');
-// // 				$('#selRecurso').append('<option value="12">Recurso 3D</option>');
-// 				var check1 = $('<div><input type="checkbox" id="checkRecurso" name="checkRecurso" value="9"> Recurso 3A</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang9"> </input><label id="rangeText9" value="Valor: 0" /></div>');
-// 				var check2 = $('<div><input type="checkbox" id="checkRecurso" name="checkRecurso" value="10"> Recurso 3B</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang10"> </input><label id="rangeText10" value="Valor: 0" /></div>');
-// 				var check3 = $('<div><input type="checkbox" id="checkRecurso" name="checkRecurso" value="11"> Recurso 3C</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang11"> </input><label id="rangeText11" value="Valor: 0" /></div>');
-// 				var check4 = $('<div><input type="checkbox" id="checkRecurso" name="checkRecurso" value="12"> Recurso 3D</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang12"> </input><label id="rangeText12" value="Valor: 0" /></div>');
-// 				check1.appendTo('#dvRecurso');
-// 				check2.appendTo('#dvRecurso');
-// 				check3.appendTo('#dvRecurso');
-// 				check4.appendTo('#dvRecurso');
-// 				$('#rang9').on('input change', function () {
-// 			        $('#rangeText9').text("Valor: "+$(this).val());
-// 			    });
-// 				$('#rang10').on('input change', function () {
-// 			        $('#rangeText10').text("Valor: "+$(this).val());
-// 			    });
-// 				$('#rang11').on('input change', function () {
-// 			        $('#rangeText11').text("Valor: "+$(this).val());
-// 			    });
-// 				$('#rang12').on('input change', function () {
-// 			        $('#rangeText12').text("Valor: "+$(this).val());
-// 			    });
-// 			}
-    		 
-    	});
-    
-    function intento(){
-    	displayData(recursos);
-      	tfvis.show.modelSummary({name: 'Modelo de Clasificacion'}, model);
-
-    }
-    function consultar(){
-//     	$.ajax({
-//     		url: 'http://localhost:8080/alumno/listalumnos/'+$('#fechaConsulta').val(),
-//     		success: function(respuesta) {
-//     			console.log(respuesta);
-//     		},
-//     		error: function() {
-//     	        console.log("No se ha podido obtener la información");
-//     	    }
-//     	});
-//     	$('#alumnosTable').empty();
-//         $('#myTable').empty();
-
-		var formattedDate = new Date($('#fechaConsulta').val());
-		var d = formattedDate.getDate();
-		var m =  formattedDate.getMonth();
-		m += 1;  // JavaScript months are 0-11
-		var y = formattedDate.getFullYear();
-		
-		var fecha = "" + d + m + y;
-    	var table = $('#alumnosTable').DataTable({
-   			"sAjaxSource": "/alumno/listalumnos/"+fecha,
-   			"sAjaxDataProp": "",
-   			"order": [[ 0, "asc" ]],
-   			"paging": false,
-   			"bDestroy": true,
-   			"aoColumns": [
-   			    { "mData": "id"},
-   			 	{ "mData": "persona.documento" },
-   			 	{ "mData": "persona.name" },   				  
-   				{ "mData": "persona.email" },
-   				{ "mData": "persona.telefono" },
-   				{ "mData": "calificado" },
-   	            {"mRender": function (data, type, full) {
-                 return '<a href="#" onclick="abrirCalificacion('+full.id+',\''+full.persona.name+'\','+full.persona.documento+')" class="btn btn-primary ImprimirTicket">Calificar</a>'
-                 }
-   	            },
-   	         	{"mRender": function (data, type, full) {
-   	         		
-   	         		if(full.calificado == 'NO'){
-   	         			return 'NO';
-   	         		}else{
-   	         			return '<a href="#" onclick="abrirPrediccion('+full.id+',\''+full.persona.name+'\','+full.persona.documento+')" class="btn btn-primary ImprimirTicket">Predecir</a>'		
-   	         		}
-                 
-                 }
-   	            }
-   			],
-   			
-   	 })
-    }
-    
-    function grabarClase(){
-    	
-    	var formattedDate = new Date($('#fechaConsulta').val());
-		var d = formattedDate.getDate();
-		var m =  formattedDate.getMonth();
-		m += 1;  // JavaScript months are 0-11
-		var y = formattedDate.getFullYear();
-		
-		var fech = "" + d + m + y;
-		
-		var recursos = [];
-		var valores = "";
-		var rsc = "";
-		
-		$.each($("input[name='checkRecurso']:checked"), function(){
-			recursos.push($(this).val());
-        });
-		
-		$.each(recursos, function( index, value ) {
-			  if(index==0){
-					rsc = recursos[index];
-					valores= $('#rang'+recursos[index]).val()
-				}else{
-					rsc += ","+ recursos[index];
-					valores += ","+ $('#rang'+recursos[index]).val()
-				}
-			});
-		
-    	$.ajax({
-    		url: 'http://localhost:8080/alumno/grabarClase',
-    		type:"POST",
-    		data:JSON.stringify({"fecha":fech, "idAlumno":$('#idAlumno').val(), "actividad":$('#selActividad').val(), "recursos":rsc, "valores":valores }),
-    		contentType:"application/json; charset=utf-8",
-    		dataType:"json",
-    		success: function(respuesta) {
-    			console.log(respuesta);
-    			consultar();
-    		},
-    		error: function() {
-//     	        console.log("No se ha podido obtener la información");
-				consultar();
-    	    }
-    	});
-//     	$('#alumnosTable').empty();
-//         $('#myTable').empty();
-
-    }
-    
-    getData = getDataFunction;
-    createModel = createModelFunction;
-    prepareData = prepareDataFunction
-    trainModel = trainModelFunction;
-    displayData = displayDataFunction;
-    evaluateModel = evaluateModelFunction;
-    
-    var model;
-    var tensorData;
-    var testTensor;
-    
-    async function run() {
-    	  $.ajax({
-        		url: 'http://localhost:8080/alumno/getDataClaseAlumnos',
-        		type:"GET",
-        		success: function(respuesta) {
-        			console.log('RUN DATA:', respuesta);
-        	    	  $(".loader").css("visibility", "visible");
-        	    	  
-        	    		model = createModelFunction();  
-
-        	    		tensorData = prepareDataFunction(respuesta);
-        	    		const {inputs, outputs} = tensorData;
-        	    			
-        	    		trainModelFunction(model, inputs, outputs, 500);
-        	    	  console.log('Done Training');
-        	    	  $(".loader").css("visibility", "hidden");
-        	    	  $(".loader2").css("visibility", "hidden");
-        	    	  
-        	    	  document.getElementById("myDiv").style.display = "block";
-        			
-        		},
-        		error: function() {
-        	        console.log("No se ha podido obtener la información");
-        	        tfvis.show.modelSummary({name: 'Modelo de Predicción'}, model);
-        	    }
-        	});
-    	}
-    	/**@desc recuperar datos de un json de un archivo local 
-    	 * @return null
-    	*/
-    	function loadJSON(path, callback) {   
-    	  var xobj = new XMLHttpRequest();
-    	      xobj.overrideMimeType("application/json");
-    	  xobj.open('GET', path, true);
-    	  xobj.onreadystatechange = function () {
-    	        if (xobj.readyState == 4 ) {
-    	        	if (xobj.status == "200") {
-    	        		callback(xobj.responseText);	
+		const model = tf.sequential();
+	
+	    var table;
+	    $(document).ready( function () {
+	//    	 $('#fechaConsulta').datepicker();
+	
+	   		$("#fechaConsulta").datepicker({ dateFormat: 'yy-mm-dd' });
+	//    	var table = $('#alumnosTable').DataTable( {
+	//    	    paging: false
+	//    	} );
+	   		$(".loader").css("visibility", "hidden");
+			$(".loader2").css("visibility", "hidden");
+	    	  
+			document.getElementById("myDiv").style.display = "block";
+			iniciar();
+	   });
+	    
+	    async function iniciar () {
+	    	const [xTrain, yTrain, xTest, yTest] = getEstilosData(.2);
+			model = await EntrenarModelo(xTrain, yTrain, xTest, yTest);
+	    }
+	    
+	    function abrirCalificacion(id, nombre, doc){
+	    	console.log(id);
+	    	console.log(nombre);
+	    	console.log(doc);
+	    	$('#nombreAlumno').val(nombre);
+	    	$('#docAlumno').val(doc);
+	    	$('#idAlumno').val(id);
+	    	
+	    	$('#mdCalificacion').modal('show');
+	    }
+	    
+	    function abrirPrediccion(id, nombre, doc){
+	    	console.log(id);
+	    	console.log(nombre);
+	    	console.log(doc);
+	    	
+	    	var formattedDate = new Date($('#fechaConsulta').val());
+			var d = formattedDate.getDate();
+			var m =  formattedDate.getMonth();
+			m += 1;  // JavaScript months are 0-11
+			var y = formattedDate.getFullYear();
+			
+			var fecha = "" + d + m + y;
+	    	
+	    	$.ajax({
+	    		url: 'http://localhost:8080/alumno/getalumno/'+fecha+'/1/'+id,
+	    		type:"GET",
+	    		success: function(respuesta) {
+	    			console.log(respuesta);
+	    			$('#nombreAlumnoPred').val(nombre);
+	    	    	$('#docAlumnoPred').val(doc);
+	    	    	$('#idAlumnoPred').val(id);
+	    	    	$('#dvEstilo').empty();
+	    			
+	    			var val1 = respuesta.val1;
+	    			var val2 = respuesta.val2;
+	    			var val3 = respuesta.val3;
+	    			var val4 = respuesta.val4;
+	    			//testTensor = tf.tensor2d([val1,val2,val3,val4], [1, 4]);
+	//     			tfvis.show.modelSummary({name: 'Modelo de Predicción'}, model);
+	    			//model.predict(testTensor).print();
+	    			//const output = model.predict(testTensor);
+	    			//const valores = output.dataSync();
+	    			
+	    			const porcEstilo1 = (valores[0]*100).toFixed(2);
+	    			const porcEstilo2 = (valores[1]*100).toFixed(2);
+	    			console.log('salida 1:', valores[0]);
+	    			console.log('salida 2:', valores[1]);
+	    			
+	    			const estilo1 = $('<div><label>LÓGICA MATEMÁTICA:</label> <input type="range" min="0" max="100" value="'+porcEstilo1+'" class="slider" id="estilo1" disabled="disabled"></input><label id="rangeText1">Valor: %'+porcEstilo1+'</label></div>');
+	    			estilo1.appendTo('#dvEstilo');
+	    			
+	    			const estilo2 = $('<div><label>ESPACIAL:</label> <input type="range" min="0" max="100" value="'+porcEstilo2+'" class="slider" id="estilo1" disabled="disabled"></input><label id="rangeText2">Valor: %'+porcEstilo2+'</label></div>');
+	    			estilo2.appendTo('#dvEstilo');
+	    			$('#mdPrediccion').modal('show');
+	    			
+	    		},
+	    		error: function() {
+	    	        console.log("No se ha podido obtener la información");
+	    	        //tfvis.show.modelSummary({name: 'Modelo de Predicción'}, model);
+	    	    }
+	    	});
+	    	
+	    }
+	    
+	    $('#selActividad').on('change', function() {
+	    		$('#dvRecurso').empty();
+	// 			if($('#selActividad').val() == '1'){
+					var check1 = $('<div><input type="checkbox" id="checkRecurso" name="checkRecurso" value="1"> Recurso 1A</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang1"></input><label id="rangeText1">Valor: 0</label></div>');
+					var check2 = $('<div><input type="checkbox" id="checkRecurso" name="checkRecurso" value="2"> Recurso 1B</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang2"></input><label id="rangeText2">Valor: 0</label></div>');
+					var check3 = $('<div><input type="checkbox" id="checkRecurso" name="checkRecurso" value="3"> Recurso 1C</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang3"></input><label id="rangeText3">Valor: 0</label></div>');
+					var check4 = $('<div><input type="checkbox" id="checkRecurso" name="checkRecurso" value="4"> Recurso 1D</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang4"></input><label id="rangeText4">Valor: 0</label></div>');
+					var check5 = $('<div><input type="checkbox" id="checkRecurso" name="checkRecurso" value="5"> Recurso 2A</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang5"></input><label id="rangeText5">Valor: 0</label></div>');
+					var check6 = $('<div><input type="checkbox" id="checkRecurso" name="checkRecurso" value="6"> Recurso 2B</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang6"></input><label id="rangeText6">Valor: 0</label></div>');
+					var check7 = $('<div><input type="checkbox" id="checkRecurso" name="checkRecurso" value="7"> Recurso 2C</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang7"></input><label id="rangeText7">Valor: 0</label></div>');
+					var check8 = $('<div><input type="checkbox" id="checkRecurso" name="checkRecurso" value="8"> Recurso 2D</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang8"></input><label id="rangeText8">Valor: 0</label></div>');
+					var check9 = $('<div><input type="checkbox" id="checkRecurso" name="checkRecurso" value="9"> Recurso 3A</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang9"></input><label id="rangeText9">Valor: 0</label></div>');
+					var check10 = $('<div><input type="checkbox" id="checkRecurso" name="checkRecurso" value="10"> Recurso 3B</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang10"> </input><label id="rangeText10">Valor: 0</label></div>');
+					var check11 = $('<div><input type="checkbox" id="checkRecurso" name="checkRecurso" value="11"> Recurso 3C</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang11"> </input><label id="rangeText11">Valor: 0</label></div>');
+					var check12 = $('<div><input type="checkbox" id="checkRecurso" name="checkRecurso" value="12"> Recurso 3D</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang12"> </input><label id="rangeText12">Valor: 0</label></div>');
+					check1.appendTo('#dvRecurso');
+					check2.appendTo('#dvRecurso');
+					check3.appendTo('#dvRecurso');
+					check4.appendTo('#dvRecurso');
+					check5.appendTo('#dvRecurso');
+					check6.appendTo('#dvRecurso');
+					check7.appendTo('#dvRecurso');
+					check8.appendTo('#dvRecurso');
+					check9.appendTo('#dvRecurso');
+					check10.appendTo('#dvRecurso');
+					check11.appendTo('#dvRecurso');
+					check12.appendTo('#dvRecurso');
+					
+					$('#rang1').on('input change', function () {
+				        $('#rangeText1').text("Valor: "+$(this).val());
+				    });
+					$('#rang2').on('input change', function () {
+				        $('#rangeText2').text("Valor: "+$(this).val());
+				    });
+					$('#rang3').on('input change', function () {
+				        $('#rangeText3').text("Valor: "+$(this).val());
+				    });
+					$('#rang4').on('input change', function () {
+				        $('#rangeText4').text("Valor: "+$(this).val());
+				    });
+					$('#rang5').on('input change', function () {
+				        $('#rangeText5').text("Valor: "+$(this).val());
+				    });
+					$('#rang6').on('input change', function () {
+				        $('#rangeText6').text("Valor: "+$(this).val());
+				    });
+					$('#rang7').on('input change', function () {
+				        $('#rangeText7').text("Valor: "+$(this).val());
+				    });
+					$('#rang8').on('input change', function () {
+				        $('#rangeText8').text("Valor: "+$(this).val());
+				    });
+					$('#rang9').on('input change', function () {
+				        $('#rangeText9').text("Valor: "+$(this).val());
+				    });
+					$('#rang10').on('input change', function () {
+				        $('#rangeText10').text("Valor: "+$(this).val());
+				    });
+					$('#rang11').on('input change', function () {
+				        $('#rangeText11').text("Valor: "+$(this).val());
+				    });
+					$('#rang12').on('input change', function () {
+				        $('#rangeText12').text("Valor: "+$(this).val());
+				    });
+	// 			}else if($('#selActividad').val() == '2'){
+	// 				$('#selRecurso').append('<option value="5">Recurso 2A</option>');
+	// 				$('#selRecurso').append('<option value="6">Recurso 2B</option>');
+	// 				$('#selRecurso').append('<option value="7">Recurso 2C</option>');
+	// 				$('#selRecurso').append('<option value="8">Recurso 2D</option>');
+	// 				var check1 = $('<div><input type="checkbox" id="checkRecurso" name="checkRecurso" value="5"> Recurso 2A</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang5"></input><label id="rangeText5" value="Valor: 0" /></div>');
+	// 				var check2 = $('<div><input type="checkbox" id="checkRecurso" name="checkRecurso" value="6"> Recurso 2B</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang6"></input><label id="rangeText6" value="Valor: 0" /></div>');
+	// 				var check3 = $('<div><input type="checkbox" id="checkRecurso" name="checkRecurso" value="7"> Recurso 2C</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang7"></input><label id="rangeText7" value="Valor: 0" /></div>');
+	// 				var check4 = $('<div><input type="checkbox" id="checkRecurso" name="checkRecurso" value="8"> Recurso 2D</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang8"></input><label id="rangeText8" value="Valor: 0" /></div>');
+	// 				check1.appendTo('#dvRecurso');
+	// 				check2.appendTo('#dvRecurso');
+	// 				check3.appendTo('#dvRecurso');
+	// 				check4.appendTo('#dvRecurso');
+	// 				$('#rang5').on('input change', function () {
+	// 			        $('#rangeText5').text("Valor: "+$(this).val());
+	// 			    });
+	// 				$('#rang6').on('input change', function () {
+	// 			        $('#rangeText6').text("Valor: "+$(this).val());
+	// 			    });
+	// 				$('#rang7').on('input change', function () {
+	// 			        $('#rangeText7').text("Valor: "+$(this).val());
+	// 			    });
+	// 				$('#rang8').on('input change', function () {
+	// 			        $('#rangeText8').text("Valor: "+$(this).val());
+	// 			    });
+	// 			}else if($('#selActividad').val() == '3'){
+	// // 				$('#selRecurso').append('<option value="9">Recurso 3A</option>');
+	// // 				$('#selRecurso').append('<option value="10">Recurso 3B</option>');
+	// // 				$('#selRecurso').append('<option value="11">Recurso 3C</option>');
+	// // 				$('#selRecurso').append('<option value="12">Recurso 3D</option>');
+	// 				var check1 = $('<div><input type="checkbox" id="checkRecurso" name="checkRecurso" value="9"> Recurso 3A</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang9"> </input><label id="rangeText9" value="Valor: 0" /></div>');
+	// 				var check2 = $('<div><input type="checkbox" id="checkRecurso" name="checkRecurso" value="10"> Recurso 3B</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang10"> </input><label id="rangeText10" value="Valor: 0" /></div>');
+	// 				var check3 = $('<div><input type="checkbox" id="checkRecurso" name="checkRecurso" value="11"> Recurso 3C</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang11"> </input><label id="rangeText11" value="Valor: 0" /></div>');
+	// 				var check4 = $('<div><input type="checkbox" id="checkRecurso" name="checkRecurso" value="12"> Recurso 3D</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang12"> </input><label id="rangeText12" value="Valor: 0" /></div>');
+	// 				check1.appendTo('#dvRecurso');
+	// 				check2.appendTo('#dvRecurso');
+	// 				check3.appendTo('#dvRecurso');
+	// 				check4.appendTo('#dvRecurso');
+	// 				$('#rang9').on('input change', function () {
+	// 			        $('#rangeText9').text("Valor: "+$(this).val());
+	// 			    });
+	// 				$('#rang10').on('input change', function () {
+	// 			        $('#rangeText10').text("Valor: "+$(this).val());
+	// 			    });
+	// 				$('#rang11').on('input change', function () {
+	// 			        $('#rangeText11').text("Valor: "+$(this).val());
+	// 			    });
+	// 				$('#rang12').on('input change', function () {
+	// 			        $('#rangeText12').text("Valor: "+$(this).val());
+	// 			    });
+	// 			}
+	    		 
+	    	});
+	    
+	    function intento(){
+	    	//displayData(recursos);
+	      	//tfvis.show.modelSummary({name: 'Modelo de Clasificacion'}, model);
+	
+	    }
+	    
+	    function consultar(){
+	//     	$.ajax({
+	//     		url: 'http://localhost:8080/alumno/listalumnos/'+$('#fechaConsulta').val(),
+	//     		success: function(respuesta) {
+	//     			console.log(respuesta);
+	//     		},
+	//     		error: function() {
+	//     	        console.log("No se ha podido obtener la información");
+	//     	    }
+	//     	});
+	//     	$('#alumnosTable').empty();
+	//         $('#myTable').empty();
+	
+			var formattedDate = new Date($('#fechaConsulta').val());
+			var d = formattedDate.getDate();
+			var m =  formattedDate.getMonth();
+			m += 1;  // JavaScript months are 0-11
+			var y = formattedDate.getFullYear();
+			
+			var fecha = "" + d + m + y;
+	    	var table = $('#alumnosTable').DataTable({
+	   			"sAjaxSource": "/alumno/listalumnos/"+fecha,
+	   			"sAjaxDataProp": "",
+	   			"order": [[ 0, "asc" ]],
+	   			"paging": false,
+	   			"bDestroy": true,
+	   			"aoColumns": [
+	   			    { "mData": "id"},
+	   			 	{ "mData": "persona.documento" },
+	   			 	{ "mData": "persona.name" },   				  
+	   				{ "mData": "persona.email" },
+	   				{ "mData": "persona.telefono" },
+	   				{ "mData": "calificado" },
+	   	            {"mRender": function (data, type, full) {
+	                 return '<a href="#" onclick="abrirCalificacion('+full.id+',\''+full.persona.name+'\','+full.persona.documento+')" class="btn btn-primary ImprimirTicket">Calificar</a>'
+	                 }
+	   	            },
+	   	         	{"mRender": function (data, type, full) {
+	   	         		
+	   	         		if(full.calificado == 'NO'){
+	   	         			return 'NO';
+	   	         		}else{
+	   	         			return '<a href="#" onclick="abrirPrediccion('+full.id+',\''+full.persona.name+'\','+full.persona.documento+')" class="btn btn-primary ImprimirTicket">Predecir</a>'		
+	   	         		}
+	                 
+	                 }
+	   	            }
+	   			],
+	   			
+	   	 })
+	    }
+	    
+	    function grabarClase(){
+	    	
+	    	var formattedDate = new Date($('#fechaConsulta').val());
+			var d = formattedDate.getDate();
+			var m =  formattedDate.getMonth();
+			m += 1;  // JavaScript months are 0-11
+			var y = formattedDate.getFullYear();
+			
+			var fech = "" + d + m + y;
+			
+			var recursos = [];
+			var valores = "";
+			var rsc = "";
+			
+			$.each($("input[name='checkRecurso']:checked"), function(){
+				recursos.push($(this).val());
+	        });
+			
+			$.each(recursos, function( index, value ) {
+				  if(index==0){
+						rsc = recursos[index];
+						valores= $('#rang'+recursos[index]).val()
+					}else{
+						rsc += ","+ recursos[index];
+						valores += ","+ $('#rang'+recursos[index]).val()
 					}
-    	        }
-    	  };
-    	  xobj.send(null);  
-    	}
-    	/**
-    	  * @desc retrieves data from defined location
-    	  * @return wine data as json
-    	*/
-    	async function getDataFunction() {
-    	  
-    	  loadJSON("recursos.json", (response) => {
-    	    const recursos = JSON.parse(response)
-    	    // const data = await recursos.json();
-    	    // console.log('response', data);
-    	    return data;
-    	  });
+				});
+			
+	    	$.ajax({
+	    		url: 'http://localhost:8080/alumno/grabarClase',
+	    		type:"POST",
+	    		data:JSON.stringify({"fecha":fech, "idAlumno":$('#idAlumno').val(), "actividad":$('#selActividad').val(), "recursos":rsc, "valores":valores }),
+	    		contentType:"application/json; charset=utf-8",
+	    		dataType:"json",
+	    		success: function(respuesta) {
+		    			console.log(respuesta);
+		    			consultar();
+		    		},
+		    		error: function() {
+		//     	        console.log("No se ha podido obtener la información");
+						consultar();
+		    	    }
+		    	});
+		//     	$('#alumnosTable').empty();
+		//         $('#myTable').empty();
+		
+		    }	    
+	    
+		    var model;
+		    var tensorData;
+		    var testTensor;
+		    
+		   async function run() {
+		   	  $.ajax({
+		       		url: 'http://localhost:8080/alumno/getDataClaseAlumnos',
+		       		type:"GET",
+		       		success: function(respuesta) {
+		       			console.log('RUN DATA:', respuesta);
+		       	    	  $(".loader").css("visibility", "visible");
+		       	    	  
+		       	    		//model = createModelFunction();  
+		
+		       	    		//tensorData = prepareDataFunction(respuesta);
+		       	    		//const {inputs, outputs} = tensorData;
+		       	    			
+		       	    		//trainModelFunction(model, inputs, outputs, 500);
+		       	    	  console.log('Done Training');
+		       	    	  $(".loader").css("visibility", "hidden");
+		       	    	  $(".loader2").css("visibility", "hidden");
+		       	    	  
+		       	    	  document.getElementById("myDiv").style.display = "block";
+		       			
+		       		},
+		       		error: function() {
+		       	        console.log("No se ha podido obtener la información");
+		       	        //tfvis.show.modelSummary({name: 'Modelo de Predicción'}, model);
+		       	    }
+		       	});
+		   	}
+	    	
+		    const ESTILOS = ['Estilo 1', 'Estilo 2', 'Estilo 3', 'Estilo 4', 'Estilo 5', 'Estilo 6', 'Estilo 7', 'Estilo 8'];
+	   		const ESTILOS_NRO = ESTILOS.length;
+	
+	   		// SET DE DATOS PARA LOS ESTILOS DE APRENDIZAJE
+	   		const ESTILOS_DATA = [
+	   		    [0.9, 0.8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+	   		    [0.8, 0.8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+	   		    [0.8, 0.9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+	   		    [0.7, 0.9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+	   		    [0.9, 0.9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+	   		    [0.7, 0.9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+	   		    [0.9, 0.8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+	   		    [0.8, 0.8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+	   		    [0.8, 0.9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+	   		    [0.9, 0.8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+	
+	   		    [0, 0.8, 0.9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+	   		    [0, 0.8, 0.9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+	   		    [0, 0.8, 0.9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+	   		    [0, 0.8, 0.9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+	   		    [0, 0.8, 0.9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+	   		    [0, 0.8, 0.9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+	   		    [0, 0.8, 0.9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+	   		    [0, 0.8, 0.9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+	   		    [0, 0.8, 0.9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+	   		    [0, 0.8, 0.9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+	   		    
+	   		    [0, 0, 0.9, 0.8, 0, 0, 0, 0, 0, 0, 0, 0, 2],
+	   		    [0, 0, 0.9, 0.8, 0, 0, 0, 0, 0, 0, 0, 0, 2],
+	   		    [0, 0, 0.9, 0.8, 0, 0, 0, 0, 0, 0, 0, 0, 2],
+	   		    [0, 0, 0.9, 0.8, 0, 0, 0, 0, 0, 0, 0, 0, 2],
+	   		    [0, 0, 0.9, 0.8, 0, 0, 0, 0, 0, 0, 0, 0, 2],
+	   		    [0, 0, 0.9, 0.8, 0, 0, 0, 0, 0, 0, 0, 0, 2],
+	   		    [0, 0, 0.9, 0.8, 0, 0, 0, 0, 0, 0, 0, 0, 2],
+	   		    [0, 0, 0.9, 0.8, 0, 0, 0, 0, 0, 0, 0, 0, 2],
+	   		    [0, 0, 0.9, 0.8, 0, 0, 0, 0, 0, 0, 0, 0, 2],
+	   		    [0, 0, 0.9, 0.8, 0, 0, 0, 0, 0, 0, 0, 0, 2],
+	
+	   		    [0, 0, 0, 0, 0.8, 0.9, 0, 0, 0, 0, 0, 0, 3],
+	   		    [0, 0, 0, 0, 0.8, 0.9, 0, 0, 0, 0, 0, 0, 3],
+	   		    [0, 0, 0, 0, 0.8, 0.9, 0, 0, 0, 0, 0, 0, 3],
+	   		    [0, 0, 0, 0, 0.9, 0.7, 0, 0, 0, 0, 0, 0, 3],
+	   		    [0, 0, 0, 0, 0.8, 0.9, 0, 0, 0, 0, 0, 0, 3],
+	   		    [0, 0, 0, 0, 0.8, 0.9, 0, 0, 0, 0, 0, 0, 3],
+	   		    [0, 0, 0, 0, 0.9, 0.9, 0, 0, 0, 0, 0, 0, 3],
+	   		    [0, 0, 0, 0, 0.8, 0.9, 0, 0, 0, 0, 0, 0, 3],
+	   		    [0, 0, 0, 0, 0.8, 0.8, 0, 0, 0, 0, 0, 0, 3],
+	   		    [0, 0, 0, 0, 0.8, 0.9, 0, 0, 0, 0, 0, 0, 3],
+	
+	   		    [0, 0, 0, 0, 0, 0.9, 0.9, 0, 0, 0, 0, 0, 4],
+	   		    [0, 0, 0, 0, 0, 0.9, 0.9, 0, 0, 0, 0, 0, 4],
+	   		    [0, 0, 0, 0, 0, 0.9, 0.9, 0, 0, 0, 0, 0, 4],
+	   		    [0, 0, 0, 0, 0, 0.7, 0.9, 0, 0, 0, 0, 0, 4],
+	   		    [0, 0, 0, 0, 0, 0.9, 0.9, 0, 0, 0, 0, 0, 4],
+	   		    [0, 0, 0, 0, 0, 0.9, 0.9, 0, 0, 0, 0, 0, 4],
+	   		    [0, 0, 0, 0, 0, 0.9, 0.9, 0, 0, 0, 0, 0, 4],
+	   		    [0, 0, 0, 0, 0, 0.9, 0.9, 0, 0, 0, 0, 0, 4],
+	   		    [0, 0, 0, 0, 0, 0.8, 0.9, 0, 0, 0, 0, 0, 4],
+	   		    [0, 0, 0, 0, 0, 0.9, 0.9, 0, 0, 0, 0, 0, 4],
+	
+	   		    [0, 0, 0, 0, 0, 0, 0.9, 0.9, 0, 0, 0, 0, 5],
+	   		    [0, 0, 0, 0, 0, 0, 0.9, 0.9, 0, 0, 0, 0, 5],
+	   		    [0, 0, 0, 0, 0, 0, 0.9, 0.9, 0, 0, 0, 0, 5],
+	   		    [0, 0, 0, 0, 0, 0, 0.9, 0.9, 0, 0, 0, 0, 5],
+	   		    [0, 0, 0, 0, 0, 0, 0.8, 0.9, 0, 0, 0, 0, 5],
+	   		    [0, 0, 0, 0, 0, 0, 0.9, 0.9, 0, 0, 0, 0, 5],
+	   		    [0, 0, 0, 0, 0, 0, 0.9, 0.9, 0, 0, 0, 0, 5],
+	   		    [0, 0, 0, 0, 0, 0, 0.9, 0.9, 0, 0, 0, 0, 5],
+	   		    [0, 0, 0, 0, 0, 0, 0.9, 0.9, 0, 0, 0, 0, 5],
+	   		    [0, 0, 0, 0, 0, 0, 0.9, 0.9, 0, 0, 0, 0, 5],
+	
+	   		    [0, 0, 0, 0, 0, 0, 0, 0.9, 0.9, 0, 0, 0, 6],
+	   		    [0, 0, 0, 0, 0, 0, 0, 0.9, 0.9, 0, 0, 0, 6],
+	   		    [0, 0, 0, 0, 0, 0, 0, 0.9, 0.9, 0, 0, 0, 6],
+	   		    [0, 0, 0, 0, 0, 0, 0, 0.9, 0.9, 0, 0, 0, 6],
+	   		    [0, 0, 0, 0, 0, 0, 0, 0.8, 0.9, 0, 0, 0, 6],
+	   		    [0, 0, 0, 0, 0, 0, 0, 0.9, 0.9, 0, 0, 0, 6],
+	   		    [0, 0, 0, 0, 0, 0, 0, 0.9, 0.9, 0, 0, 0, 6],
+	   		    [0, 0, 0, 0, 0, 0, 0, 0.7, 0.9, 0, 0, 0, 6],
+	   		    [0, 0, 0, 0, 0, 0, 0, 0.9, 0.9, 0, 0, 0, 6],
+	   		    [0, 0, 0, 0, 0, 0, 0, 0.8, 0.9, 0, 0, 0, 6],
+	
+	   		    [0, 0, 0, 0, 0, 0, 0, 0, 0.9, 0.9, 0, 0, 7],
+	   		    [0, 0, 0, 0, 0, 0, 0, 0, 0.9, 0.9, 0, 0, 7],
+	   		    [0, 0, 0, 0, 0, 0, 0, 0, 0.9, 0.9, 0, 0, 7],
+	   		    [0, 0, 0, 0, 0, 0, 0, 0, 0.9, 0.9, 0, 0, 7],
+	   		    [0, 0, 0, 0, 0, 0, 0, 0, 0.9, 0.9, 0, 0, 7],
+	   		    [0, 0, 0, 0, 0, 0, 0, 0, 0.9, 0.9, 0, 0, 7],
+	   		    [0, 0, 0, 0, 0, 0, 0, 0, 0.9, 0.9, 0, 0, 7],
+	   		    [0, 0, 0, 0, 0, 0, 0, 0, 0.9, 0.9, 0, 0, 7],
+	   		    [0, 0, 0, 0, 0, 0, 0, 0, 0.8, 0.9, 0, 0, 7],
+	   		    [0, 0, 0, 0, 0, 0, 0, 0, 0.9, 0.9, 0, 0, 7],
+	
+	   		    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5],
+	   		    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5],
+	   		    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5],
+	   		    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5],
+	   		    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5],
+	   		    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5],
+	   		    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5],
+	   		    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5],
+	   		    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5],
+	   		    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5]
+	   		];
+		   
+	    	function extraerInputs(data) {
+	    		let inputs = []
+	    		inputs = data.map(d => [d.recurso1, d.recurso2, d.recurso3, d.recurso4])
+	    		return inputs;
+	    	}
+	
+	    	function getEstilosData(testDividir) {
+	    	    return tf.tidy(() => {
+	    	        const datosPorClase = [];
+	    	        const resultadoPorClase = [];
 
-    	  // const wineDataReq = await fetch('https://raw.githubusercontent.com/NMZivkovic/file_hosting/master/wine_quality.json');  
-    	  // const wineDataReq = await fetch('http://localhost:8080/alumno/promRecursos');  
-    	  // const wineDataReq = JSON.parse(recursos);
-    	  // console.log('getData', wineDataReq);
-    	  // const wineData = await wineDataReq.json();  
-    	  // return wineData;
-    	}
+	    	        ESTILOS.foreach( (index, element) => {
+	    	        	datosPorClase.push([]);
+	    	            resultadoPorClase.push([]);
+	    	        });
 
+	    	        for (const fila of ESTILOS_DATA) {
+	    	            const prediccion = fila[fila.length - 1];
+	    	            const data = fila.slice(0, fila.length - 1); //
+	    	            datosPorClase[prediccion].push(data); //
+	    	            resultadoPorClase[prediccion].push(prediccion); //
+	    	        }
 
-    	/**
-    	  * @desc plots one 
-    	  * @param array values - array of values
-    	  * @param string name - name of the plot
-    	  * @param string xoutput - x name 
-    	  * @param string youtput - y name
-    	*/
-    	function singlePlot(values, name, xoutput, youtput)
-    	{
-    	  tfvis.render.scatterplot(
-    	    {name: name},
-    	    {values}, 
-    	    {
-    	      xoutput: xoutput,
-    	      youtput: youtput,
-    	      height: 300,
-    	      xLabel: "Recurso Utilizado",
-    	      yLabel: "Estilo de Aprendizaje"
-    	    }
-    	  );
-    	}
+	    	        const xTrains = [];
+	    	        const yTrains = [];
+	    	        const xTests = [];
+	    	        const yTests = [];
 
-    	function histograma(values, name, xoutput, youtput) {
-    	  // tfvis.render.barchart(
-    	  //   {name: name}, 
-    	  //   {values},
-    	  //   {
-    	  //    width: 400,
-    	  //    yLabel: 'My value',
-    	  //   }
-    	  // );
-    	  const data = [
-    	    { index: 0, value: 50 },
-    	    { index: 1, value: 100 },
-    	    { index: 2, value: 150 },
-    	   ];
-    	  
-    	  // Render to visor
-    	  const surface = { name: 'Recursos Utilizados', tab: 'Visor' };
-    	  tfvis.render.barchart(surface, values);
-    	}
+	    	        ESTILOS.foreach( (index, element) => {
+	    	        	const [xTrain, yTrain, xTest, yTest] = 
+	    	                convertirATensores(datosPorClase[index], resultadoPorClase[index], testDividir);
 
-    	/**
-    	  * @desc plots one 
-    	  * @param json data - complete json that contains wine quality data 
-    	*/
-    	function displayDataFunction(data){
+	    	            xTrains.push(xTrain);
+	    	            yTrains.push(yTrain);
+	    	            xTests.push(xTest);
+	    	            yTests.push(yTest);
+	    	        });
 
-    	  
-    	  // const data = [
-    	  //   {index: 'foo', value: 1},{index: 'bar', value: 7}, {index: 3, value: 3},
-    	  //   {index: 5, value: 6}];
-    	  // tfvis.render.barchart(document.getElementById('plot5'), data, {
-    	  //   yLabel: 'My value',
-    	  //   width: 400
-    	  // });
-    	  
-    	  // histograma(1, 1, 1, 1);
-    	  
+	    	        const concatAxis = 0;
+	    	        const test1 = xTrains;
+	    	        const test2 = tf.concat(xTrains, concatAxis);
+	    	        console.log('test1 concat', test1);
+	    	        console.log('test2 concat', test2);
+	    	        return [
+	    	            tf.concat(xTrains, concatAxis), tf.concat(yTrains, concatAxis),
+	    	            tf.concat(xTests, concatAxis), tf.concat(yTests, concatAxis)
+	    	        ];
 
-    	  let displayData = data.map(d => ({
-    	    x: d.recurso1,
-    	    y: d.estilo
-    	  }));
+	    	    });
+	    	}
+	    	
+	    	function convertirATensores (data, resultado, testDividir) {
+	    	    const numEjemplos = data.length;
+	    	    if (numEjemplos !== resultado.length) {
+	    	        throw new Error('data y split tienen distintos numeros de ejemplos');
+	    	    }
+	    	    const numTestEjemplos = Math.round(numEjemplos * testDividir);
+	    	    const numTrainEjemplos = numEjemplos - numTestEjemplos;
 
-    	  singlePlot(displayData, 'Recurso 1 v Estilo', 'Recursos', 'Estilo')
+	    	    const nro_recursos = data[0].length;
 
-    	  displayData = data.map(d => ({
-    	    x: d.recurso2,
-    	    y: d.quality
-    	  }));
+	    	    // Creamos un tensor 2d para las entradas (recursos)
+	    	    const xs = tf.tensor2d(data, [numEjemplos, nro_recursos]);
+	    	    // Creamos un tensor 1D 
+	    	    const ys = tf.oneHot(tf.tensor1d(resultado).toInt(), ESTILOS_NRO);
+	    	    // Dividimos la data en sets de Entrenamiento y Test usando 'slice'
+	    	    const xTrain = xs.slice([0, 0], [numTrainEjemplos, nro_recursos]);
+	    	    const xTest = xs.slice([numTrainEjemplos, 0], [numTestEjemplos, nro_recursos]);
+	    	    const yTrain = ys.slice([0, 0], [numTrainEjemplos, ESTILOS_NRO]);
+	    	    const yTest = ys.slice([0, 0], [numTestEjemplos, ESTILOS_NRO]);
 
-    	  singlePlot(displayData, 'Recurso 2 v Estilo', 'Recursos', 'Estilo')
+	    	    return [xTrain, yTrain, xTest, yTest];
+	    	}
+	    	
+	    	async function EntrenarModelo(xTrain, yTrain, xTest, yTest) {
+				const model = tf.sequential();
+				const ratioAprendizaje = .01;
+				const numEpochs = 60;
+				const optimizer = tf.train.adam(ratioAprendizaje);
+				// 16 neuronas en la capa oculta
+				model.add(tf.layers.dense({
+					units: 16, 
+					activation: 'sigmoid', 
+					inputShape: [xTrain.shape[1]]
+				}));
+				// 8 neuronas de salida
+				model.add(tf.layers.dense({
+					units: 8,
+					activation: 'softmax'
+				}));
 
-    	  displayData = data.map(d => ({
-    	    x: d.recurso3,
-    	    y: d.estilo
-    	  }));
+				model.compile({
+					optimizer: optimizer,
+					loss: 'categoricalCrossentropy',
+					metrics: ['accuracy']
+				});
 
-    	  singlePlot(displayData, 'Recurso 3 v Estilo', 'Recursos', 'Estilo')
-    	}
+				const historico = await model.fit(xTrain, yTrain, {
+					epochs: numEpochs,
+					validationData: [xTest, yTest],
+					callbacks: tfvis.show.fitCallbacks(
+						{ name: 'Training Performance' },
+						['loss', 'categoricalCrossentropy'], 
+						{ height: 200, callbacks: ['onEpochEnd'] }
+					)
+				});
 
-    	/**
-    	  * @desc creates tensorflow graph
-    	  * @return model
-    	*/
-    	function createModelFunction() {
-    	  const model = tf.sequential(); 
-    	  model.add(tf.layers.dense({inputShape: [4], units: 6, activation: 'sigmoid'}));
-    	  model.add(tf.layers.dense({units: 8, activation: 'sigmoid'}));
-    	  // model.add(tf.layers.dense({units: 20, useBias: true, activation: 'sigmoid'}));
+				return model;
+			}
 
-    	  return model;
-    	}
-
-    	/**
-    	  * @desc creates array of input data for every sample
-    	  * @param json data - complete json that contains wine quality data 
-    	  * @return array of input data
-    	*/
-    	function extractInputs(data)
-    	{
-    	  let inputs = []
-    	  inputs = data.map(d => [d.recurso1, d.recurso2, d.recurso3, d.recurso4])
-    		return inputs;
-    	}
-
-    	/**
-    	  * @desc converts data from json format to tensors
-    	  * @param json data - complete json that contains wine quality data 
-    	  * @return tuple of converted data that can be used for training model
-    	*/
-    	function prepareDataFunction(data) {
-    	  
-    	  return tf.tidy(() => {
-    	    tf.util.shuffle(data);
-    	    
-    	    const inputs = extractInputs(data);
-    	    const outputs = data.map(d => d.estilo);
-
-    	    const inputTensor = tf.tensor2d(inputs, [inputs.length, inputs[0].length]);
-    	    const outputTensor = tf.oneHot(tf.tensor1d(outputs, 'int32'), 8);
-
-    	    const inputMax = inputTensor.max();
-    	    const inputMin = inputTensor.min();  
-    	    const outputMax = outputTensor.max();
-    	    const outputMin = outputTensor.min();
-
-    	    const normalizedInputs = inputTensor.sub(inputMin).div(inputMax.sub(inputMin));
-    	    const normalizedoutputs = outputTensor.sub(outputMin).div(outputMax.sub(outputMin));
-
-    	    return {
-    	      inputs: normalizedInputs,
-    	      outputs: normalizedoutputs,
-    	      inputMax,
-    	      inputMin,
-    	      outputMax,
-    	      outputMin,
-    	    }
-    	  });  
-    	}
-
-    	/**
-    	  * @desc trains model
-    	  * @return trained model
-    	*/
-    	async function trainModelFunction(model, inputs, outputs, epochs) {
-    	  model.compile({
-    	    optimizer: tf.train.sgd(0.1),
-    	    loss: tf.losses.meanSquaredError
-    	  });
-    	  
-    	  const batchSize = 64;
-    	  
-    	  return await model.fit(inputs, outputs, {
-    	    batchSize,
-    	    epochs,
-    	    shuffle: true
-    	  });
-    	}
-
-    	/**
-    	  * @desc evaluates the model
-    	*/
-    	async function evaluateModelFunction(model, inputs, outputs)
-    	{
-    	  const result = await model.evaluate(inputs, outputs, {batchSize: 64});
-    	  console.log('Accuracy is:')
-    	  result[1].print();
-    	}
-
-    	document.addEventListener('DOMContentLoaded', run);
-
-    	const recursos = [];
-    	recursos.push({
-    			"recurso1": 0,
-    			"recurso2": 0,		
-    			"recurso3": 0.89,
-    	    "recurso4": 0.95,
-    	    "estilo": 1
-    		}, {
-    			"recurso1": 0,
-    			"recurso2": 0,
-    			"recurso3": 0.7,
-    			"recurso4": 0.75,
-    	    "estilo": 1
-    		}, {
-    			"recurso1": 0,
-    			"recurso2": 0.1,
-    			"recurso3": 0.85,
-    			"recurso4": 0.9,
-    	    "estilo": 1
-    		}, {
-    			"recurso1": 0,
-    			"recurso2": 0.15,
-    			"recurso3": 0.9,
-    			"recurso4": 0.99,
-    	    "estilo": 1
-    		}, {
-    			"recurso1": 0,
-    			"recurso2": 0,
-    			"recurso3": 0.95,
-    			"recurso4": 0.89,
-    	    "estilo": 1
-    		}, {
-    			"recurso1": 0,
-    			"recurso2": 0,
-    			"recurso3": 0.75,
-    			"recurso4": 0.89,		
-    	    "estilo": 1
-    		}, {
-    			"recurso1": 0,
-    			"recurso2": 0,
-    			"recurso3": 0.75,
-    			"recurso4": 0.89,		
-    	    "estilo": 1
-    		}, {
-    			"recurso1": 0,
-    			"recurso2": 0,
-    			"recurso3": 0.75,
-    			"recurso4": 0.89,		
-    	    "estilo": 1
-    		}, {
-    			"recurso1": 0,
-    			"recurso2": 0,
-    			"recurso3": 0.75,
-    			"recurso4": 0.89,		
-    	    "estilo": 1
-    		}, {
-    			"recurso1": 0,
-    			"recurso2": 0,
-    			"recurso3": 0.75,
-    			"recurso4": 0.89,		
-    	    "estilo": 1
-    		}, {
-    			"recurso1": 0,
-    			"recurso2": 0,
-    			"recurso3": 0.75,
-    			"recurso4": 0.89,		
-    	    "estilo": 1
-    		}, {
-    			"recurso1": 0.85,
-    			"recurso2": 0.95,
-    			"recurso3": 0,
-    			"recurso4": 0,
-    	    "estilo": 2
-    		}, {
-    			"recurso1": 0.95,
-    			"recurso2": 0.9,
-    			"recurso3": 0,
-    			"recurso4": 0,
-    	    "estilo": 2
-    		}, {
-    			"recurso1": 0.91,
-    			"recurso2": 0.89,
-    			"recurso3": 0,
-    			"recurso4": 0,
-    	    "estilo": 2
-    		}, {
-    			"recurso1": 0.91,
-    			"recurso2": 0.89,
-    			"recurso3": 0,
-    			"recurso4": 0,
-    	    "estilo": 2
-    		}, {
-    			"recurso1": 0.91,
-    			"recurso2": 0.89,
-    			"recurso3": 0,
-    			"recurso4": 0,
-    	    "estilo": 2
-    		}, {
-    			"recurso1": 0.91,
-    			"recurso2": 0.89,
-    			"recurso3": 0,
-    			"recurso4": 0,
-    	    "estilo": 2
-    		}, {
-    			"recurso1": 0.91,
-    			"recurso2": 0.89,
-    			"recurso3": 0,
-    			"recurso4": 0,
-    	    "estilo": 2
-    		}, {
-    			"recurso1": 0.91,
-    			"recurso2": 0.89,
-    			"recurso3": 0,
-    			"recurso4": 0,
-    	    "estilo": 2
-    		}, {
-    			"recurso1": 0.91,
-    			"recurso2": 0.89,
-    			"recurso3": 0,
-    			"recurso4": 0,
-    	    "estilo": 2
-    		});
-
-
+			async function predecir() {
+				// 80% data para entrenamiento y 20% para pruebas
+				const [xTrain, yTrain, xTest, yTest] = getEstilosData(.2);
+				model = await EntrenarModelo(xTrain, yTrain, xTest, yTest);
+				
+				const input = tf.tensor2d([0.79, 0.85, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [1, 12]);
+				const prediccion = model.predict(input).dataSync();
+				console.log('Prediccion', prediccion);
+				 
+				const data = [
+				  {index: 0, value: (prediccion[0] * 100).toFixed(2)},
+				  {index: 1, value: (prediccion[1] * 100).toFixed(2)},
+				  {index: 2, value: (prediccion[2] * 100).toFixed(2)},
+				  {index: 3, value: (prediccion[3] * 100).toFixed(2)},
+				  {index: 4, value: (prediccion[4] * 100).toFixed(2)},
+				  {index: 5, value: (prediccion[5] * 100).toFixed(2)},
+				  {index: 6, value: (prediccion[6] * 100).toFixed(2)},
+				  {index: 7, value: (prediccion[7] * 100).toFixed(2)}
+				];
+				
+				// Render to visor
+				const surface = { name: 'Bar chart', tab: 'Resultados' };
+				tfvis.render.barchart(surface, data);
+				
+				const data2 = {
+				  values: [[(prediccion[0] * 100).toFixed(2), (prediccion[1] * 100).toFixed(2), (prediccion[2] * 100).toFixed(2)],
+				           [(prediccion[3] * 100).toFixed(2), (prediccion[4] * 100).toFixed(2), (prediccion[5] * 100).toFixed(2)], 
+				           [(prediccion[6] * 100).toFixed(2), (prediccion[7] * 100).toFixed(2)]
+				           ]
+				  };        
+				// Render to visor
+				const surface2 = { name: 'Confusion Matrix with Excluded Diagonal', tab: 'Resultados' };
+				
+				tfvis.render.confusionMatrix(surface2, data2, {
+				  shadeDiagonal: true
+				});
+			}
+	    	
+		
+	    	//document.addEventListener('DOMContentLoaded', run);
+	
+	
     </script>
+
 </body>
 </html>
