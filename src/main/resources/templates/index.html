@@ -374,19 +374,31 @@
     
     $('#selActividad').on('change', function() {
     		$('#dvRecurso').empty();
-			if($('#selActividad').val() == '1'){
-// 				$('#selRecurso').append('<option value="1">Recurso 1A</option>');
-// 				$('#selRecurso').append('<option value="2">Recurso 1B</option>');
-// 				$('#selRecurso').append('<option value="3">Recurso 1C</option>');
-// 				$('#selRecurso').append('<option value="4">Recurso 1D</option>');
+// 			if($('#selActividad').val() == '1'){
 				var check1 = $('<div><input type="checkbox" id="checkRecurso" name="checkRecurso" value="1"> Recurso 1A</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang1"></input><label id="rangeText1">Valor: 0</label></div>');
 				var check2 = $('<div><input type="checkbox" id="checkRecurso" name="checkRecurso" value="2"> Recurso 1B</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang2"></input><label id="rangeText2">Valor: 0</label></div>');
 				var check3 = $('<div><input type="checkbox" id="checkRecurso" name="checkRecurso" value="3"> Recurso 1C</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang3"></input><label id="rangeText3">Valor: 0</label></div>');
 				var check4 = $('<div><input type="checkbox" id="checkRecurso" name="checkRecurso" value="4"> Recurso 1D</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang4"></input><label id="rangeText4">Valor: 0</label></div>');
+				var check5 = $('<div><input type="checkbox" id="checkRecurso" name="checkRecurso" value="5"> Recurso 2A</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang5"></input><label id="rangeText5">Valor: 0</label></div>');
+				var check6 = $('<div><input type="checkbox" id="checkRecurso" name="checkRecurso" value="6"> Recurso 2B</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang6"></input><label id="rangeText6">Valor: 0</label></div>');
+				var check7 = $('<div><input type="checkbox" id="checkRecurso" name="checkRecurso" value="7"> Recurso 2C</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang7"></input><label id="rangeText7">Valor: 0</label></div>');
+				var check8 = $('<div><input type="checkbox" id="checkRecurso" name="checkRecurso" value="8"> Recurso 2D</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang8"></input><label id="rangeText8">Valor: 0</label></div>');
+				var check9 = $('<div><input type="checkbox" id="checkRecurso" name="checkRecurso" value="9"> Recurso 3A</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang9"></input><label id="rangeText9">Valor: 0</label></div>');
+				var check10 = $('<div><input type="checkbox" id="checkRecurso" name="checkRecurso" value="10"> Recurso 3B</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang10"> </input><label id="rangeText10">Valor: 0</label></div>');
+				var check11 = $('<div><input type="checkbox" id="checkRecurso" name="checkRecurso" value="11"> Recurso 3C</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang11"> </input><label id="rangeText11">Valor: 0</label></div>');
+				var check12 = $('<div><input type="checkbox" id="checkRecurso" name="checkRecurso" value="12"> Recurso 3D</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang12"> </input><label id="rangeText12">Valor: 0</label></div>');
 				check1.appendTo('#dvRecurso');
 				check2.appendTo('#dvRecurso');
 				check3.appendTo('#dvRecurso');
 				check4.appendTo('#dvRecurso');
+				check5.appendTo('#dvRecurso');
+				check6.appendTo('#dvRecurso');
+				check7.appendTo('#dvRecurso');
+				check8.appendTo('#dvRecurso');
+				check9.appendTo('#dvRecurso');
+				check10.appendTo('#dvRecurso');
+				check11.appendTo('#dvRecurso');
+				check12.appendTo('#dvRecurso');
 				
 				$('#rang1').on('input change', function () {
 			        $('#rangeText1').text("Valor: "+$(this).val());
@@ -400,19 +412,6 @@
 				$('#rang4').on('input change', function () {
 			        $('#rangeText4').text("Valor: "+$(this).val());
 			    });
-			}else if($('#selActividad').val() == '2'){
-// 				$('#selRecurso').append('<option value="5">Recurso 2A</option>');
-// 				$('#selRecurso').append('<option value="6">Recurso 2B</option>');
-// 				$('#selRecurso').append('<option value="7">Recurso 2C</option>');
-// 				$('#selRecurso').append('<option value="8">Recurso 2D</option>');
-				var check1 = $('<div><input type="checkbox" id="checkRecurso" name="checkRecurso" value="5"> Recurso 2A</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang5"></input><label id="rangeText5" value="Valor: 0" /></div>');
-				var check2 = $('<div><input type="checkbox" id="checkRecurso" name="checkRecurso" value="6"> Recurso 2B</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang6"></input><label id="rangeText6" value="Valor: 0" /></div>');
-				var check3 = $('<div><input type="checkbox" id="checkRecurso" name="checkRecurso" value="7"> Recurso 2C</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang7"></input><label id="rangeText7" value="Valor: 0" /></div>');
-				var check4 = $('<div><input type="checkbox" id="checkRecurso" name="checkRecurso" value="8"> Recurso 2D</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang8"></input><label id="rangeText8" value="Valor: 0" /></div>');
-				check1.appendTo('#dvRecurso');
-				check2.appendTo('#dvRecurso');
-				check3.appendTo('#dvRecurso');
-				check4.appendTo('#dvRecurso');
 				$('#rang5').on('input change', function () {
 			        $('#rangeText5').text("Valor: "+$(this).val());
 			    });
@@ -425,19 +424,6 @@
 				$('#rang8').on('input change', function () {
 			        $('#rangeText8').text("Valor: "+$(this).val());
 			    });
-			}else if($('#selActividad').val() == '3'){
-// 				$('#selRecurso').append('<option value="9">Recurso 3A</option>');
-// 				$('#selRecurso').append('<option value="10">Recurso 3B</option>');
-// 				$('#selRecurso').append('<option value="11">Recurso 3C</option>');
-// 				$('#selRecurso').append('<option value="12">Recurso 3D</option>');
-				var check1 = $('<div><input type="checkbox" id="checkRecurso" name="checkRecurso" value="9"> Recurso 3A</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang9"> </input><label id="rangeText9" value="Valor: 0" /></div>');
-				var check2 = $('<div><input type="checkbox" id="checkRecurso" name="checkRecurso" value="10"> Recurso 3B</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang10"> </input><label id="rangeText10" value="Valor: 0" /></div>');
-				var check3 = $('<div><input type="checkbox" id="checkRecurso" name="checkRecurso" value="11"> Recurso 3C</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang11"> </input><label id="rangeText11" value="Valor: 0" /></div>');
-				var check4 = $('<div><input type="checkbox" id="checkRecurso" name="checkRecurso" value="12"> Recurso 3D</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang12"> </input><label id="rangeText12" value="Valor: 0" /></div>');
-				check1.appendTo('#dvRecurso');
-				check2.appendTo('#dvRecurso');
-				check3.appendTo('#dvRecurso');
-				check4.appendTo('#dvRecurso');
 				$('#rang9').on('input change', function () {
 			        $('#rangeText9').text("Valor: "+$(this).val());
 			    });
@@ -450,7 +436,57 @@
 				$('#rang12').on('input change', function () {
 			        $('#rangeText12').text("Valor: "+$(this).val());
 			    });
-			}
+// 			}else if($('#selActividad').val() == '2'){
+// 				$('#selRecurso').append('<option value="5">Recurso 2A</option>');
+// 				$('#selRecurso').append('<option value="6">Recurso 2B</option>');
+// 				$('#selRecurso').append('<option value="7">Recurso 2C</option>');
+// 				$('#selRecurso').append('<option value="8">Recurso 2D</option>');
+// 				var check1 = $('<div><input type="checkbox" id="checkRecurso" name="checkRecurso" value="5"> Recurso 2A</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang5"></input><label id="rangeText5" value="Valor: 0" /></div>');
+// 				var check2 = $('<div><input type="checkbox" id="checkRecurso" name="checkRecurso" value="6"> Recurso 2B</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang6"></input><label id="rangeText6" value="Valor: 0" /></div>');
+// 				var check3 = $('<div><input type="checkbox" id="checkRecurso" name="checkRecurso" value="7"> Recurso 2C</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang7"></input><label id="rangeText7" value="Valor: 0" /></div>');
+// 				var check4 = $('<div><input type="checkbox" id="checkRecurso" name="checkRecurso" value="8"> Recurso 2D</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang8"></input><label id="rangeText8" value="Valor: 0" /></div>');
+// 				check1.appendTo('#dvRecurso');
+// 				check2.appendTo('#dvRecurso');
+// 				check3.appendTo('#dvRecurso');
+// 				check4.appendTo('#dvRecurso');
+// 				$('#rang5').on('input change', function () {
+// 			        $('#rangeText5').text("Valor: "+$(this).val());
+// 			    });
+// 				$('#rang6').on('input change', function () {
+// 			        $('#rangeText6').text("Valor: "+$(this).val());
+// 			    });
+// 				$('#rang7').on('input change', function () {
+// 			        $('#rangeText7').text("Valor: "+$(this).val());
+// 			    });
+// 				$('#rang8').on('input change', function () {
+// 			        $('#rangeText8').text("Valor: "+$(this).val());
+// 			    });
+// 			}else if($('#selActividad').val() == '3'){
+// // 				$('#selRecurso').append('<option value="9">Recurso 3A</option>');
+// // 				$('#selRecurso').append('<option value="10">Recurso 3B</option>');
+// // 				$('#selRecurso').append('<option value="11">Recurso 3C</option>');
+// // 				$('#selRecurso').append('<option value="12">Recurso 3D</option>');
+// 				var check1 = $('<div><input type="checkbox" id="checkRecurso" name="checkRecurso" value="9"> Recurso 3A</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang9"> </input><label id="rangeText9" value="Valor: 0" /></div>');
+// 				var check2 = $('<div><input type="checkbox" id="checkRecurso" name="checkRecurso" value="10"> Recurso 3B</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang10"> </input><label id="rangeText10" value="Valor: 0" /></div>');
+// 				var check3 = $('<div><input type="checkbox" id="checkRecurso" name="checkRecurso" value="11"> Recurso 3C</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang11"> </input><label id="rangeText11" value="Valor: 0" /></div>');
+// 				var check4 = $('<div><input type="checkbox" id="checkRecurso" name="checkRecurso" value="12"> Recurso 3D</input> <input type="range" min="0" max="100" value="0" class="slider" id="rang12"> </input><label id="rangeText12" value="Valor: 0" /></div>');
+// 				check1.appendTo('#dvRecurso');
+// 				check2.appendTo('#dvRecurso');
+// 				check3.appendTo('#dvRecurso');
+// 				check4.appendTo('#dvRecurso');
+// 				$('#rang9').on('input change', function () {
+// 			        $('#rangeText9').text("Valor: "+$(this).val());
+// 			    });
+// 				$('#rang10').on('input change', function () {
+// 			        $('#rangeText10').text("Valor: "+$(this).val());
+// 			    });
+// 				$('#rang11').on('input change', function () {
+// 			        $('#rangeText11').text("Valor: "+$(this).val());
+// 			    });
+// 				$('#rang12').on('input change', function () {
+// 			        $('#rangeText12').text("Valor: "+$(this).val());
+// 			    });
+// 			}
     		 
     	});
     
