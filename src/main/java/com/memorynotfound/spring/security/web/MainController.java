@@ -17,6 +17,11 @@ public class MainController {
     public String login(Model model) {
         return "login";
     }
+    
+    @GetMapping("/viewAlumnos")
+    public String viewAlumnos(Model model) {
+        return "indexApoderado";
+    }
 
     @GetMapping("/user")
     public String userIndex() {

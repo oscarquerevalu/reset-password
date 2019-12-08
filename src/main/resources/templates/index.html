@@ -479,52 +479,6 @@
 	    		    	    }
 	    		    	});
 	    			
-	    			
-	    			
-// 	    			Grafico
-	    			var speedCanvas = document.getElementById("speedChart");
-
-	    			Chart.defaults.global.defaultFontFamily = "Lato";
-	    			Chart.defaults.global.defaultFontSize = 18;
-
-	    			var dataFirst = {
-	    			    label: "Fecha 11/10/2019",
-	    			    data: [0, 59, 75, 20, 20, 55, 40, 40],
-	    			    lineTension: 0,
-	    			    fill: false,
-	    			    borderColor: 'red'
-	    			  };
-
-	    			var dataSecond = {
-	    			    label: "Fecha 20/10/2019",
-	    			    data: [20, 15, 60, 60, 65, 30, 70, 85],
-	    			    lineTension: 0,
-	    			    fill: false,
-	    			  borderColor: 'blue'
-	    			  };
-
-	    			var speedData = {
-	    			  labels: ["LV", "LM", "E", "CK", "M", "INTER", "INTRA", "N"],
-	    			  datasets: [dataFirst, dataSecond]
-	    			};
-
-	    			var chartOptions = {
-	    			  legend: {
-	    			    display: true,
-	    			    position: 'top',
-	    			    labels: {
-	    			      boxWidth: 80,
-	    			      fontColor: 'black'
-	    			    }
-	    			  }
-	    			};
-
-	    			var lineChart = new Chart(speedCanvas, {
-	    			  type: 'line',
-	    			  data: speedData,
-	    			  options: chartOptions
-	    			});
-	    			
 	    		},
 	    		error: function() {
 	    	        console.log("No se ha podido obtener la información");

@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.www.BasicAuthenticationEntryPoint;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -31,6 +32,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserService userService;
     
+    private AuthenticationSuccessHandler authenticationSuccessHandler;
+    
+    @Autowired
+    public SecurityConfig(AuthenticationSuccessHandler authenticationSuccessHandler) {
+        this.authenticationSuccessHandler = authenticationSuccessHandler;
+    }
+    
     private static final String[] AUTH_WHITELIST = {
             "/swagger-resources/**",
             "/swagger-ui.html",
@@ -46,6 +54,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                             "/registration**",
                             "/forgot-password**",
                             "/clase**",
+                            "/estiloAlumno**",
                             "/alumno**",
                             "/swagger-resources/**",
                             "/swagger-ui.html",
@@ -61,6 +70,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .formLogin()
                         .loginPage("/login")
                             .permitAll()
+                .successHandler(authenticationSuccessHandler)
                 .and()
                     .logout()
                         .invalidateHttpSession(true)

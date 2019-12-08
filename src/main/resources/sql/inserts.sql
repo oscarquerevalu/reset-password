@@ -65,3 +65,5 @@ INSERT INTO `db_eduini`.`recurso_didactico` (`nombre`, `peso`, `id_estilo`) VALU
 INSERT INTO `db_eduini`.`recurso_didactico` (`nombre`, `peso`, `id_estilo`) VALUES ('Flores', '1', '8');
 INSERT INTO `db_eduini`.`recurso_didactico` (`nombre`, `peso`, `id_estilo`) VALUES ('Libro', '1', '7');
 INSERT INTO `db_eduini`.`recurso_didactico` (`nombre`, `peso`, `id_estilo`) VALUES ('Castillo', '1', '6');
+INSERT INTO `db_eduini`.`persona` (`confirm_email`, `direccion`, `documento`, `email`, `name`, `telefono`, `terms`, `username`, `password`, `role`, `id_apoderado`) VALUES ('jcastillo@gmail.com', 'metro de av. Tomas Valle', '1111111', 'jcastillo@gmail.com', 'apoderado1', '44444444', true, 'apoderado1','$2a$10$InNhEXWztd5qf2WAa/iTQOblQb3oW.VhOGZOApOWCy4//k/JUhMBa','ROLE_APODE', 1);
+INSERT INTO `db_eduini`.`apoderado` (`id`) VALUES ('1');
