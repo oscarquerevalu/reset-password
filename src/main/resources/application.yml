@@ -5,10 +5,10 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/db_eduini?serverTimezone=UTC
     username: root
-    password: admin
+    password: root
   devtools:
     restart:
-      additional-paths: /Users/USER/git/reset-password/src/main/resources/templates
+      additional-paths: /Users/Oscar/git/reset-password/src/main/resources/templates
 
 # ===============================
 # = JPA configurations

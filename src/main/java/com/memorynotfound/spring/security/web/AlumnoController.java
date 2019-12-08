@@ -130,41 +130,59 @@ public class AlumnoController {
 			Double rec2 = new Double("0");
 			Double rec3 = new Double("0");
 			Double rec4 = new Double("0");
-			Long rc1 = 0L;
-			Long rc2 = 0L;
-			Long rc3 = 0L;
-			Long rc4 = 0L;
+			Double rec5 = new Double("0");
+			Double rec6 = new Double("0");
+			Double rec7 = new Double("0");
+			Double rec8 = new Double("0");
+			Double rec9 = new Double("0");
+			Double rec10 = new Double("0");
+			Double rec11 = new Double("0");
+			Double rec12 = new Double("0");
 			
 			for (ClaseAlumno claseAlumno : listaClaseAlumno) {
 				lstClaseAlumnoActividades = claseAlumnoActividadesService.findByIdClasealumno(claseAlumno.getId());
 				
 				for (ClaseAlumnoActividades claseAlumnoActividades : lstClaseAlumnoActividades) {
-					if(rec1.equals(new Double("0"))) {
+					if(rec1.equals(new Double("0")) && (new Long(1)).equals(claseAlumnoActividades.getId_recurso())) {
 						rec1 = claseAlumnoActividades.getValor() != null && !claseAlumnoActividades.getValor().equals(new Double("0"))? claseAlumnoActividades.getValor():new Double("0");
-						rc1 = claseAlumnoActividades.getId_recurso();
-					}else if(rec2.equals(new Double("0"))) {
+					}else if(rec2.equals(new Double("0")) && (new Long(2)).equals(claseAlumnoActividades.getId_recurso())) {
 						rec2 = claseAlumnoActividades.getValor() != null && !claseAlumnoActividades.getValor().equals(new Double("0"))? claseAlumnoActividades.getValor():new Double("0");
-						rc2 = claseAlumnoActividades.getId_recurso();
-					}else if(rec3.equals(new Double("0"))) {
+					}else if(rec3.equals(new Double("0")) && (new Long(3)).equals(claseAlumnoActividades.getId_recurso())) {
 						rec3 = claseAlumnoActividades.getValor() != null && !claseAlumnoActividades.getValor().equals(new Double("0"))? claseAlumnoActividades.getValor():new Double("0");
-						rc3 = claseAlumnoActividades.getId_recurso();
-					}else if(rec4.equals(new Double("0"))) {
+					}else if(rec4.equals(new Double("0")) && (new Long(4)).equals(claseAlumnoActividades.getId_recurso())) {
 						rec4 = claseAlumnoActividades.getValor() != null && !claseAlumnoActividades.getValor().equals(new Double("0"))? claseAlumnoActividades.getValor():new Double("0");
-						rc4 = claseAlumnoActividades.getId_recurso();
-					}else {
-						break;
+					}else if(rec5.equals(new Double("0")) && (new Long(5)).equals(claseAlumnoActividades.getId_recurso())) {
+						rec5 = claseAlumnoActividades.getValor() != null && !claseAlumnoActividades.getValor().equals(new Double("0"))? claseAlumnoActividades.getValor():new Double("0");
+					}else if(rec6.equals(new Double("0")) && (new Long(6)).equals(claseAlumnoActividades.getId_recurso())) {
+						rec6 = claseAlumnoActividades.getValor() != null && !claseAlumnoActividades.getValor().equals(new Double("0"))? claseAlumnoActividades.getValor():new Double("0");
+					}else if(rec7.equals(new Double("0"))  && (new Long(7)).equals(claseAlumnoActividades.getId_recurso())) {
+						rec7 = claseAlumnoActividades.getValor() != null && !claseAlumnoActividades.getValor().equals(new Double("0"))? claseAlumnoActividades.getValor():new Double("0");
+					}else if(rec8.equals(new Double("0")) && (new Long(8)).equals(claseAlumnoActividades.getId_recurso())) {
+						rec8 = claseAlumnoActividades.getValor() != null && !claseAlumnoActividades.getValor().equals(new Double("0"))? claseAlumnoActividades.getValor():new Double("0");
+					}else if(rec9.equals(new Double("0")) && (new Long(9)).equals(claseAlumnoActividades.getId_recurso())) {
+						rec9 = claseAlumnoActividades.getValor() != null && !claseAlumnoActividades.getValor().equals(new Double("0"))? claseAlumnoActividades.getValor():new Double("0");
+					}else if(rec10.equals(new Double("0")) && (new Long(10)).equals(claseAlumnoActividades.getId_recurso())) {
+						rec10 = claseAlumnoActividades.getValor() != null && !claseAlumnoActividades.getValor().equals(new Double("0"))? claseAlumnoActividades.getValor():new Double("0");
+					}else if(rec11.equals(new Double("0")) && (new Long(11)).equals(claseAlumnoActividades.getId_recurso())) {
+						rec11 = claseAlumnoActividades.getValor() != null && !claseAlumnoActividades.getValor().equals(new Double("0"))? claseAlumnoActividades.getValor():new Double("0");
+					}else if(rec12.equals(new Double("0")) && (new Long(12)).equals(claseAlumnoActividades.getId_recurso())) {
+						rec12 = claseAlumnoActividades.getValor() != null && !claseAlumnoActividades.getValor().equals(new Double("0"))? claseAlumnoActividades.getValor():new Double("0");
 					}
 				}
 			}
 			
-			map.put("rec1", rc1);
 			map.put("val1", rec1);
-			map.put("rec2", rc2);
 			map.put("val2", rec2);
-			map.put("rec3", rc3);
 			map.put("val3", rec3);
-			map.put("rec4", rc4);
 			map.put("val4", rec4);
+			map.put("val5", rec5);
+			map.put("val6", rec6);
+			map.put("val7", rec7);
+			map.put("val8", rec8);
+			map.put("val9", rec9);
+			map.put("val10", rec10);
+			map.put("val11", rec11);
+			map.put("val12", rec12);
 			
 		} catch (Exception e) {
 			// TODO: handle exception
