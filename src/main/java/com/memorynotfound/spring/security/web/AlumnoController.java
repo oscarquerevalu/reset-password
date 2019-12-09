@@ -311,7 +311,7 @@ public class AlumnoController {
     		claseAlumnoActividades.setValor((new Double(valores[i]))/100);
     		claseAlumnoActividadesService.guardarActividad(claseAlumnoActividades);
 		}
-    	return "";
+    	return "Clase registrada";
     }
     
     @GetMapping(value="/promRecursos", produces=MediaType.APPLICATION_JSON_VALUE)
