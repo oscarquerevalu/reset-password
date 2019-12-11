@@ -97,7 +97,7 @@ public class EstiloAlumnoController {
 				lstDataVal.add(6,estiloAlumno.getValor7()!=null?estiloAlumno.getValor7():0.0);
 				lstDataVal.add(7,estiloAlumno.getValor8()!=null?estiloAlumno.getValor8():0.0);
 				map.put("data", lstDataVal);
-				map.put("label", "Fecha "+estiloAlumno.getFecha());
+				map.put("label", "Fecha "+estiloAlumno.getFecha().substring(0, 2)+"/"+estiloAlumno.getFecha().substring(2, 4)+"/"+estiloAlumno.getFecha().substring(4));
 				map.put("lineTension", 0);
 				map.put("fill", false);
 				map.put("borderColor", "blue");
